@@ -4,11 +4,12 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
 import { Dispatches } from "./payload/collections/Dispatches";
 import { Contacts } from "./payload/collections/Contacts";
+import { Leads } from "./payload/collections/Leads";
 
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET ?? "",
 
-  collections: [Dispatches, Contacts],
+  collections: [Dispatches, Contacts, Leads],
 
   editor: lexicalEditor({}),
 

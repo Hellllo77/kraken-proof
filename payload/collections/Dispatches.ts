@@ -1,6 +1,16 @@
 import type { CollectionConfig } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 
+function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .slice(0, 80);
+}
+
 export const Dispatches: CollectionConfig = {
   slug: "dispatches",
   admin: {
@@ -8,7 +18,22 @@ export const Dispatches: CollectionConfig = {
     defaultColumns: ["title", "terrain", "depth", "status", "publishedAt"],
   },
   access: {
-    read: () => true, // public read for the Insights page
+    read: () => true,
+  },
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        // Auto-generate slug from title if not provided
+        if (!data.slug && data.title) {
+          data.slug = slugify(data.title as string);
+        }
+        // Set publishedAt when status flips to published
+        if (data.status === "published" && !data.publishedAt) {
+          data.publishedAt = new Date().toISOString();
+        }
+        return data;
+      },
+    ],
   },
   fields: [
     {
@@ -19,9 +44,11 @@ export const Dispatches: CollectionConfig = {
     {
       name: "slug",
       type: "text",
-      required: true,
       unique: true,
-      admin: { position: "sidebar" },
+      admin: {
+        position: "sidebar",
+        description: "Auto-generated from title. Override if needed.",
+      },
     },
     {
       name: "terrain",
@@ -56,7 +83,11 @@ export const Dispatches: CollectionConfig = {
     {
       name: "publishedAt",
       type: "date",
-      admin: { position: "sidebar", date: { pickerAppearance: "dayAndTime" } },
+      admin: {
+        position: "sidebar",
+        date: { pickerAppearance: "dayAndTime" },
+        description: "Auto-set when status → published.",
+      },
     },
     {
       name: "status",

@@ -1,6 +1,5 @@
 import { Resend } from "resend";
 
-// Instantiated lazily — only runs server-side in API routes
 let client: Resend | null = null;
 
 export function getResend(): Resend {
@@ -33,6 +32,29 @@ export async function sendContactNotification(data: ContactPayload): Promise<voi
       ``,
       `Brief:`,
       data.brief,
+    ].join("\n"),
+  });
+}
+
+export interface LeadPayload {
+  name?: string;
+  email: string;
+  source?: string;
+}
+
+export async function sendLeadNotification(data: LeadPayload): Promise<void> {
+  const resend = getResend();
+  const from = process.env.RESEND_FROM!;
+  const to   = process.env.RESEND_TO!;
+
+  await resend.emails.send({
+    from,
+    to,
+    subject: `New lead — ${data.email}`,
+    text: [
+      `Email: ${data.email}`,
+      `Name: ${data.name ?? "—"}`,
+      `Source: ${data.source ?? "homepage-cta"}`,
     ].join("\n"),
   });
 }

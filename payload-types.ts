@@ -7,6 +7,7 @@ export interface Config {
   collections: {
     dispatches: Dispatch;
     contacts:   Contact;
+    leads:      Lead;
   };
 }
 
@@ -34,4 +35,14 @@ export interface Contact {
   notified?:     boolean | null;
   updatedAt:     string;
   createdAt:     string;
+}
+
+export interface Lead {
+  id:        number;
+  name?:     string | null;
+  email:     string;
+  source?:   "homepage-cta" | "insights-page" | "capabilities-page" | "other" | null;
+  notified?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
