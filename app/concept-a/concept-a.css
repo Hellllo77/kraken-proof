@@ -356,9 +356,28 @@ html:has(.ca-root) {
 /* Pull-quote LEFT with amber hairline; body copy RIGHT.
    Explicitly different from all other sections. */
 .ca-section-premise {
+  position: relative;
   background: var(--bg-ground);
   padding: var(--section-pad) 0;
 }
+
+/* Depth texture — section3-navy-texture, soft-light 0.22
+   Reason: mid-tone teal pixels create perceptible surface variation on dark navy.
+   NOT multiply (invisible dark-on-dark), NOT screen (washes out abyss). */
+.ca-section-premise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/concept-a/section3-navy-texture.jpg');
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: soft-light;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ca-section-premise > * { position: relative; z-index: 1; }
 
 .ca-premise {
   display: grid;
@@ -406,9 +425,27 @@ html:has(.ca-root) {
 /* Headline breaks to feature. Instruments in a newspaper-style grid — NO card chrome,
    NO identical cells. Featured instrument (Strategic) spans 2 cols. */
 .ca-section-instruments {
+  position: relative;
   background: var(--bg-alt);
   padding: var(--section-pad) 0;
 }
+
+/* Depth texture — capabilities-bg, soft-light 0.25
+   Very dark asset adds structural depth without competing with instrument text. */
+.ca-section-instruments::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/concept-a/capabilities-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: soft-light;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ca-section-instruments > * { position: relative; z-index: 1; }
 
 .ca-instruments-container {
   max-width: var(--max-w);
@@ -497,10 +534,27 @@ html:has(.ca-root) {
 /* 4 phases side-by-side on desktop — reads as a chart, not a list.
    Amber rule at TOP of section separates from instruments section. */
 .ca-section-method {
+  position: relative;
   background: var(--bg-ground);
   padding: var(--section-pad) 0;
   border-top: 1px solid var(--color-amber);
 }
+
+/* Depth texture — section3-navy-texture, soft-light 0.16 (lighter — phase labels stay crisp) */
+.ca-section-method::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/concept-a/section3-navy-texture.jpg');
+  background-size: cover;
+  background-position: center top;
+  mix-blend-mode: soft-light;
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ca-section-method > * { position: relative; z-index: 1; }
 
 .ca-method-container {
   max-width: var(--max-w);
