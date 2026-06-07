@@ -139,8 +139,8 @@ export default function CapabilitiesPage() {
 
       {/* ── 8 Instrument Briefs — full list ── */}
       <section
+        className="section-instruments"
         style={{
-          background: "var(--navy-900)",
           paddingBottom: "var(--space-32)",
         }}
       >
@@ -148,7 +148,7 @@ export default function CapabilitiesPage() {
           <div style={{ height: "1px", background: "var(--depth-blue-600)", opacity: 0.4, marginBottom: "var(--space-16)" }} />
 
           <InstrumentReveal staggerCount={INSTRUMENTS.length}>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div className="instruments-grid">
               {INSTRUMENTS.map((inst, i) => (
                 <div
                   key={inst.id}
@@ -159,7 +159,6 @@ export default function CapabilitiesPage() {
                     gap: "var(--space-8)",
                     paddingTop: "var(--space-8)",
                     paddingBottom: "var(--space-8)",
-                    borderTop: i === 0 ? "none" : "1px solid rgba(58,110,165,0.2)",
                     alignItems: "start",
                   }}
                 >

@@ -4,12 +4,11 @@ import RevealOnScroll from "./RevealOnScroll";
 export default function CommissionCTA() {
   return (
     <section
+      className="section-instruments"
       style={{
-        background: "var(--navy-900)",
         paddingTop: "var(--space-32)",
         paddingBottom: "var(--space-32)",
         textAlign: "center",
-        position: "relative",
         overflow: "hidden",
       }}
     >

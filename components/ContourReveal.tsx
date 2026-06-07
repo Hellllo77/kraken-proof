@@ -51,7 +51,6 @@ export default function ContourReveal() {
         ref={svgRef}
         viewBox="0 0 800 200"
         width="100%"
-        height="auto"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

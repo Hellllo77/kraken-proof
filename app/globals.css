@@ -362,6 +362,27 @@ a:hover {
   z-index: 1;
 }
 
+/* ─── 2-up instrument briefs grid ─── */
+.instruments-grid {
+  display: flex;
+  flex-direction: column;
+}
+/* Border between rows — CSS sibling, not inline, so media-query can override */
+.instruments-grid > .reveal-row + .reveal-row {
+  border-top: 1px solid rgba(58,110,165,0.2);
+}
+@media (min-width: 820px) {
+  .instruments-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-12);
+  }
+  /* 2nd item is in the same first row — no top border */
+  .instruments-grid > .reveal-row:nth-child(2) {
+    border-top: none;
+  }
+}
+
 /* ─── Reduced motion (hard compliance) ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
