@@ -1,4 +1,9 @@
+import type { Viewport } from "next";
 import { Barlow, Barlow_Condensed, Cormorant_Garamond } from "next/font/google";
+
+export const viewport: Viewport = {
+  themeColor: "#0D1B2A",
+};
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],

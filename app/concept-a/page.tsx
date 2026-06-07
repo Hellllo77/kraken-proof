@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import ConceptANav from "@/components/ConceptANav";
 import ConceptAHeroImmersive from "@/components/ConceptAHeroImmersive";
 import ConceptAEmerge from "@/components/ConceptAEmerge";
@@ -8,6 +9,24 @@ export const metadata: Metadata = {
   title: "The Commission at Depth",
   description:
     "KRAKEN surveys the strategic terrain so your decisions are made from maps, not assumptions.",
+  openGraph: {
+    title: "The Commission at Depth — Kraken Interactive",
+    description:
+      "KRAKEN surveys the strategic terrain so your decisions are made from maps, not assumptions.",
+    images: [
+      {
+        url: "/assets/hero-poster-v2.jpg",
+        width: 1920,
+        height: 1080,
+        alt: "KRAKEN — The Commission at Depth",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Commission at Depth — Kraken Interactive",
+    images: ["/assets/hero-poster-v2.jpg"],
+  },
 };
 
 /* Real KRAKEN Intelligence names from TerrainDiagram.tsx (verbatim) */
@@ -115,6 +134,7 @@ export default function ConceptAPage() {
       {/* ── Section 2: PREMISE — Pattern: SPLIT-2COL (pull-quote left | body right) ── */}
       {/* Explicitly different from hero full-bleed and instruments mosaic */}
       <section className="ca-section-premise">
+        <div className="ca-img-layer" data-parallax-rate="0.15" aria-hidden="true" />
         <ConceptAEmerge>
           <div className="ca-premise">
             <blockquote className="ca-premise-quote">
@@ -144,6 +164,7 @@ export default function ConceptAPage() {
       {/* 3-col newspaper grid; Strategic Intelligence spans 2 cols (featured);
           NO numbered markers; NO identical card structure; NO icon+heading+text template */}
       <section className="ca-section-instruments">
+        <div className="ca-img-layer" data-parallax-rate="0.10" aria-hidden="true" />
         <div className="ca-instruments-container">
           <ConceptAEmerge>
             <div className="ca-instruments-header">
@@ -151,19 +172,17 @@ export default function ConceptAPage() {
             </div>
           </ConceptAEmerge>
 
-          <ConceptAEmerge>
-            <div className="ca-instruments-mosaic">
-              {INSTRUMENTS.map((inst) => (
-                <div
-                  key={inst.name}
-                  className={`ca-instrument${inst.featured ? " ca-instrument--featured" : ""}`}
-                >
-                  <h3 className="ca-instrument-name">{inst.name}</h3>
-                  <p className="ca-instrument-desc">{inst.desc}</p>
-                </div>
-              ))}
-            </div>
-          </ConceptAEmerge>
+          <div className="ca-instruments-mosaic">
+            {INSTRUMENTS.map((inst) => (
+              <div
+                key={inst.name}
+                className={`ca-instrument ca-instrument-card${inst.featured ? " ca-instrument--featured" : ""}`}
+              >
+                <h3 className="ca-instrument-name">{inst.name}</h3>
+                <p className="ca-instrument-desc">{inst.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -171,6 +190,7 @@ export default function ConceptAPage() {
       {/* 4 phases side-by-side on desktop — reads as a chart, not a list.
           2px amber border-top separates from instruments section. */}
       <section className="ca-section-method">
+        <div className="ca-img-layer" data-parallax-rate="0.20" aria-hidden="true" />
         <div className="ca-method-container">
           <ConceptAEmerge>
             <div className="ca-method-header">
@@ -179,18 +199,16 @@ export default function ConceptAPage() {
           </ConceptAEmerge>
 
           {/* Horizontal flex on desktop, vertical stack on mobile */}
-          <ConceptAEmerge>
-            <div className="ca-phases">
-              {PHASES.map((phase) => (
-                <div key={phase.label} className="ca-phase">
-                  <span className="ca-phase-label">{phase.label}</span>
-                  <span className="ca-phase-name">{phase.name}</span>
-                  <span className="ca-phase-duration">{phase.duration}</span>
-                  <p className="ca-phase-body">{phase.body}</p>
-                </div>
-              ))}
-            </div>
-          </ConceptAEmerge>
+          <div className="ca-phases">
+            {PHASES.map((phase) => (
+              <div key={phase.label} className="ca-phase ca-phase-item">
+                <span className="ca-phase-label">{phase.label}</span>
+                <span className="ca-phase-name">{phase.name}</span>
+                <span className="ca-phase-duration">{phase.duration}</span>
+                <p className="ca-phase-body">{phase.body}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -198,6 +216,7 @@ export default function ConceptAPage() {
       {/* Narrow single column; empty state acknowledged without apology.
           Amber rules above+below contain the absence as designed space. */}
       <section className="ca-section-dispatches">
+        <div className="ca-img-layer" aria-hidden="true" />
         <div className="ca-dispatches-container">
           <ConceptAEmerge>
             <h2 className="ca-dispatches-headline">Field dispatches.</h2>
@@ -215,6 +234,11 @@ export default function ConceptAPage() {
       {/* 2px amber border-top signals "this is the moment". */}
       {/* Different from hero: headline meets email across a horizontal axis */}
       <section className="ca-section-cta">
+        <div className="ca-video-layer" data-parallax-rate="0.10" aria-hidden="true">
+          <video autoPlay muted loop playsInline preload="none" aria-hidden="true">
+            <source src="/assets/concept-a/cta-ambient-depth.mp4" type="video/mp4" />
+          </video>
+        </div>
         <div className="ca-cta-container">
           <ConceptAEmerge>
             <div className="ca-cta-header">
@@ -233,6 +257,7 @@ export default function ConceptAPage() {
           </ConceptAEmerge>
         </div>
       </section>
+      <Script src="/concept-a-interior-parallax.js" strategy="afterInteractive" />
     </div>
   );
 }
