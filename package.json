@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "video:render": "remotion render remotion/index.ts",
+    "video:studio": "remotion studio remotion/index.ts"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.85.0",
@@ -20,12 +22,14 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "@remotion/cli": "^4.0.473",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "remotion": "^4.0.473",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
