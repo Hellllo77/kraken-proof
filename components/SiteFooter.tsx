@@ -41,10 +41,36 @@ export default function SiteFooter() {
               color: "var(--color-navy-400)",
               maxWidth: "320px",
               lineHeight: "var(--lh-body)",
+              marginBottom: "var(--space-2)",
             }}
           >
             Strategic intelligence consultancy. We map the terrain before we advise.
           </p>
+          <address
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "var(--type-xs)",
+              color: "var(--color-navy-400)",
+              lineHeight: "var(--lh-body)",
+              fontStyle: "normal",
+              marginBottom: "var(--space-1)",
+            }}
+          >
+            Kraken Interactive Sdn. Bhd.<br />
+            16-2 Jalan PJU 8/3A, Damansara Perdana<br />
+            47820 Petaling Jaya, Selangor
+          </address>
+          <a
+            href="mailto:hello@kraken.com.my"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "var(--type-xs)",
+              color: "var(--color-navy-500)",
+              textDecoration: "none",
+            }}
+          >
+            hello@kraken.com.my
+          </a>
         </div>
 
         <nav>

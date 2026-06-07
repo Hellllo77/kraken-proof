@@ -4,49 +4,49 @@ import ContourReveal from "@/components/ContourReveal";
 
 export const metadata: Metadata = {
   title: "The Survey Instruments",
-  description: "Eight disciplines, deployed as one integrated system.",
+  description: "Eight arms, deployed as one integrated system.",
 };
 
 const INSTRUMENTS = [
   {
     id: "01",
-    name: "Strategic Diagnosis",
-    body: "The opening instrument, and the one most frequently abbreviated by firms eager to reach the solution phase. Before any other survey work begins, we establish what the actual problem is — not the presenting symptom, but the underlying condition that the symptom describes. This phase is frequently the most consequential and the least visible.",
+    name: "Strategic Intelligence",
+    body: "The opening arm, and the one most frequently abbreviated by firms that want to reach the solution phase. Before any other survey work begins, we establish what the actual problem is — not the presenting problem, which is the symptom the organisation has decided to name, but the underlying condition it reflects. This requires structured inquiry without a predetermined hypothesis and a willingness to challenge the framing a client brings to the first conversation. Most engagements are materially reshaped at this stage.",
   },
   {
     id: "02",
-    name: "Competitive Terrain Mapping",
-    body: "We document the competitive landscape as it exists, not as leadership perceives it. The gap between these two pictures is almost always instructive. Competitor positions, pricing structures, messaging strategies, and operational patterns are mapped against the organisation's own stated position.",
+    name: "Operational Intelligence",
+    body: "The gap between how an organisation describes its operations and how those operations actually function is a reliable source of strategic misinformation. We map the processes that govern how the business converts inputs to outputs: where decisions stall, where effort is duplicated, where the system creates friction that compounds at scale, and where the gap between designed process and actual practice is widest. The output is an operational map, not an optimisation plan.",
   },
   {
     id: "03",
-    name: "Organisational Diagnostics",
-    body: "Structure, decision patterns, and the informal systems that govern actual operations. The organisation chart describes authority; the diagnostic maps what actually happens when decisions need to be made. The gap between these two structures is where most strategic plans break down during execution.",
+    name: "Technology Intelligence",
+    body: "The majority of failed digital transformations we are subsequently asked to investigate share a common origin: technology decisions made before an accurate assessment of organisational readiness. This arm establishes what the organisation can actually execute technologically — current systems, team capability, data infrastructure, and the gap between the present state and the state required to benefit from the technology under consideration. We assess readiness before we recommend investment.",
   },
   {
     id: "04",
-    name: "Market Positioning Analysis",
-    body: "Establishing the gap between how the organisation presents itself and how it is understood — by customers, by competitors, and by prospective employees. Repositioning efforts that skip this diagnostic frequently fail because they are correcting a self-image rather than a market reality.",
+    name: "People & Culture Intelligence",
+    body: "Organisational structure is documented. Organisational culture is not. The informal systems through which decisions are actually made, information actually moves, and accountability actually operates are frequently more consequential than the formal ones. We survey both layers — the structure and the culture beneath it — to establish what the organisation is genuinely capable of and where the constraints on execution actually live. A strategy the organisation cannot culturally execute is not a strategy.",
   },
   {
     id: "05",
-    name: "Digital Intelligence Assessment",
-    body: "Determining what the organisation can actually execute digitally before any technology recommendation is made. Most digital transformation failures are execution failures dressed as technology selection problems. We diagnose the constraint first.",
+    name: "Communication Intelligence",
+    body: "Organisations communicate simultaneously in two directions: to the market and internally. Both channels are frequently misaligned with strategic intent. This arm examines how the business presents itself externally — brand, positioning, messaging — and how it communicates internally: decision clarity, information flow, and the alignment between leadership intent and team understanding. Misalignment in either direction is a strategic problem, not a communications one.",
   },
   {
     id: "06",
-    name: "Operational Analysis",
-    body: "Mapping the processes that convert inputs to outputs, and the friction points that compound over time. Operational inefficiency frequently presents as a strategy problem or a talent problem. The diagnostic determines which it actually is.",
+    name: "Data & Analytics Intelligence",
+    body: "Decisions made without reliable evidence are hypotheses, not strategy. This arm assesses the quality and completeness of the organisation's evidence base: what data is being collected, how it is being interpreted, where the analytical gaps are, and which business questions are currently being answered by assumption rather than measurement. The output is an evidence map for the strategic work that follows.",
   },
   {
     id: "07",
-    name: "Growth Architecture",
-    body: "Designing the strategy: where the leverage points are, which opportunities are genuinely available given the actual constraints, and in what sequence. Growth architecture is only meaningful as a synthesis of the preceding diagnostics — it cannot be performed in isolation from them.",
+    name: "Market & Competitive Intelligence",
+    body: "Organisations tend to monitor their most visible competitors closely and their actual threats poorly. The most visible competitors are the ones that have already moved; the actual threats are the ones still below the surface. We document the competitive landscape as it exists — direct competitors, adjacent sector entrants, structural dynamics, and the weak signals that indicate where the terrain is shifting before that shift becomes apparent to the market. No legacy assumptions are preserved in the output.",
   },
   {
     id: "08",
-    name: "Delivery Alignment",
-    body: "Remaining engaged through execution to ensure the map is being followed as the terrain changes. Most strategic failures occur at this stage. We are present to read the terrain as it shifts — not to execute for the organisation, but to ensure the organisation's execution remains connected to the strategic picture.",
+    name: "Transformation Intelligence",
+    body: "Recommendations that are not implemented are not recommendations. They are documents. This arm ensures the map produced by the preceding seven is actually used. We remain engaged through the execution phase not to deliver the strategy on the organisation's behalf, but to confirm the map is being followed, test the original diagnosis against emerging evidence as the organisation moves, and intervene when execution momentum outpaces strategic understanding — which it reliably does.",
   },
 ];
 
@@ -86,8 +86,8 @@ export default function CapabilitiesPage() {
               marginBottom: "var(--space-6)",
             }}
           >
-            Eight disciplines, deployed as one integrated system. No instrument operates in isolation —
-            the picture a single instrument produces is partial. The complete survey requires all eight.
+            Eight arms, deployed as one integrated system. No arm operates in isolation —
+            the picture a single arm produces is partial. The complete survey requires all eight.
           </p>
 
           {/* Terrain diagram — Mira will replace with 8-capability terrain diagram */}

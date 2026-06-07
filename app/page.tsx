@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 };
 
 const INSTRUMENTS = [
-  { id: "01", name: "Strategic Diagnosis",          desc: "Establishing what the actual problem is before any other survey work begins." },
-  { id: "02", name: "Competitive Terrain Mapping",   desc: "Documenting the competitive landscape as it exists, not as leadership perceives it." },
-  { id: "03", name: "Organisational Diagnostics",    desc: "Mapping internal terrain: structure, decision patterns, and the informal systems that govern actual operations." },
-  { id: "04", name: "Market Positioning Analysis",   desc: "Establishing the gap between how the organisation presents itself and how it is understood." },
-  { id: "05", name: "Digital Intelligence Assessment", desc: "Determining what the organisation can actually execute digitally before any technology recommendation is made." },
-  { id: "06", name: "Operational Analysis",          desc: "Mapping the processes that convert inputs to outputs, and the friction points that compound over time." },
-  { id: "07", name: "Growth Architecture",           desc: "Designing the strategy: where the leverage points are, which opportunities are genuinely available." },
-  { id: "08", name: "Delivery Alignment",            desc: "Remaining engaged through execution to ensure the map is being followed as the terrain changes." },
+  { id: "01", name: "Strategic Intelligence",           desc: "Establishing what the actual problem is before any other survey work begins." },
+  { id: "02", name: "Operational Intelligence",         desc: "Mapping how the business actually operates, not how it is described." },
+  { id: "03", name: "Technology Intelligence",          desc: "Determining what the organisation can actually execute digitally before any recommendation is made." },
+  { id: "04", name: "People & Culture Intelligence",    desc: "Surveying both the formal structure and the informal systems beneath it." },
+  { id: "05", name: "Communication Intelligence",       desc: "Examining how the business presents itself externally and communicates internally." },
+  { id: "06", name: "Data & Analytics Intelligence",    desc: "Establishing the quality and completeness of the evidence base that strategic decisions rest on." },
+  { id: "07", name: "Market & Competitive Intelligence", desc: "Documenting the competitive landscape as it exists, not as leadership perceives it." },
+  { id: "08", name: "Transformation Intelligence",      desc: "Ensuring the map produced by the preceding seven arms is followed through execution." },
 ];
 
 const PHASES = [
@@ -166,8 +166,8 @@ export default async function HomePage() {
               marginBottom: "var(--space-8)",
             }}
           >
-            Eight instruments.
-            <br />One complete survey.
+            Eight arms.
+            <br />One system.
           </h2>
 
           <div

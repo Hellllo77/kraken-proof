@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "The Cartographers",
-  description: "We began in 2008 as a digital agency. We are a strategic intelligence consultancy.",
+  description: "We began in 2010 as a digital agency. We are a strategic intelligence consultancy.",
 };
 
 export default function AboutPage() {
@@ -47,7 +47,7 @@ export default function AboutPage() {
                 Origin
               </h2>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)", marginBottom: "var(--space-2)" }}>
-                We began in 2008 as a digital agency. We were capable practitioners: websites built to brief,
+                We began in 2010 as a digital agency. We were capable practitioners: websites built to brief,
                 campaigns executed on time, projects delivered within scope. Clients were professionally satisfied.
                 The work was technically sound.
               </p>
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 difficulty of accurate self-diagnosis. What we eventually mapped was this: we had been answering
                 questions that had not yet been properly asked.
               </p>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)" }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--color-navy-700)", lineHeight: "var(--lh-body)" }}>
                 Clients arrived with a solution already in mind and we had delivered it without examining
                 the premises. The actual problem lived deeper in the terrain. In the structural assumptions
                 leadership had never examined. In the gap between the strategy on paper and the organisation&apos;s
@@ -82,7 +82,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            {/* The Repositioning */}
+            {/* Where this takes us */}
             <div>
               <h2
                 style={{
@@ -93,21 +93,17 @@ export default function AboutPage() {
                   marginBottom: "var(--space-3)",
                 }}
               >
-                The Repositioning
+                Where This Takes Us
               </h2>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)", marginBottom: "var(--space-2)" }}>
-                Shifting from a firm that delivers to a firm that diagnoses first is not a comfortable transition.
-                It means entering engagements without a predetermined output. It means turning down projects where
-                the client wants immediate execution.
-              </p>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)" }}>
-                The repositioning was complete by 2015. Since then, Kraken Interactive has operated as a
-                strategic intelligence consultancy: engaged before the brief is finalised, not after it has
-                been written. The recommendation is only as good as the survey that precedes it.
+                That recognition is what this practice is now built on. The work we take on has not changed
+                in type; the discipline that precedes it has. We enter engagements later in the diagnostic
+                process than most firms, and earlier in the strategic one — before the brief has been finalised,
+                not after. This site represents where that shift is taking us.
               </p>
             </div>
 
-            {/* How We Work */}
+            {/* How we work */}
             <div
               className="field-note"
               style={{ padding: "var(--space-4)" }}
@@ -123,19 +119,21 @@ export default function AboutPage() {
               >
                 How We Work
               </h2>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)", marginBottom: "var(--space-2)" }}>
-                We are a small firm by design. The instruments we deploy are human ones: structured attention,
-                disciplined inquiry, pattern recognition developed over seventeen years of fieldwork, and the
-                honesty to report what the survey finds rather than what the client would prefer to hear.
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)", marginBottom: "var(--space-3)" }}>
+                The five disciplines that define the practice: Listen First. Diagnose Deeply.
+                Multidisciplinary. Real Improvement. Digital Native. These are not values — they are working
+                methods. Each one reflects a failure mode we observed often enough to build a practice around
+                avoiding.
               </p>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)" }}>
-                These instruments do not scale through headcount. The same people who conduct the site walk
-                are the ones who write the recommendations and remain present through delivery. This limits
-                how many surveys we can run simultaneously. We take on engagements accordingly.
+                We are a small firm by design. The instruments we deploy are human ones: structured attention,
+                disciplined inquiry, pattern recognition, and the honesty to report what the survey finds
+                rather than what the client would prefer to hear. The same people who conduct the site walk
+                are the ones who write the recommendations and remain present through delivery.
               </p>
             </div>
 
-            {/* Principals — placeholder for copy */}
+            {/* Principals — placeholder pending real bios */}
             <div>
               <h2
                 style={{
@@ -146,10 +144,12 @@ export default function AboutPage() {
                   marginBottom: "var(--space-3)",
                 }}
               >
-                The Principals
+                The Team
               </h2>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-400)", lineHeight: "var(--lh-body)", fontStyle: "italic" }}>
-                [ Principal bios — copy to be provided by client. See research-lead brief. ]
+                [ Team — to be populated with real principal names and bios supplied by Kraken Interactive.
+                Section omitted from the build until confirmed. Copy will be written in the same register
+                on receipt of real names. ]
               </p>
             </div>
           </div>
