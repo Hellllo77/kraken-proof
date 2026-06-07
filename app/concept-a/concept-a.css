@@ -1,0 +1,553 @@
+/* Concept A: Restrained Authority — isolated styles, --ca-* namespace */
+/* No amber. No imagery. No animation beyond spec. */
+
+/* ─── Tokens ─── */
+:root {
+  --ca-bg-ground:      #FAFAF8;
+  --ca-bg-section-alt: #F4F4F0;
+  --ca-bg-dark:        #0D1B2A;
+  --ca-text-primary:   #0D1B2A;
+  --ca-text-dim:       #3A5472;
+  --ca-text-on-dark:   #FAFAF8;
+  --ca-rule-light:     #E4E4DF;
+  --ca-rule-heavy:     #0D1B2A;
+  --ca-focus-ring:     #0D1B2A;
+
+  --ca-font-display:   var(--font-ca-barlow, 'Barlow', system-ui, sans-serif);
+  --ca-font-condensed: var(--font-ca-barlow-condensed, 'Barlow Condensed', 'Barlow', system-ui, sans-serif);
+
+  --ca-type-2xs:  clamp(0.625rem, 0.55rem + 0.2vw, 0.6875rem);
+  --ca-type-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --ca-type-sm:   clamp(0.875rem, 0.8rem + 0.3vw, 0.9375rem);
+  --ca-type-base: clamp(0.9375rem, 0.875rem + 0.3vw, 1rem);
+  --ca-type-md:   clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --ca-type-lg:   clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
+  --ca-type-xl:   clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  --ca-type-2xl:  clamp(3rem, 2rem + 4vw, 5rem);
+  --ca-type-hero: clamp(4rem, 2.5rem + 7vw, 7rem);
+
+  --ca-col-gutter:  clamp(16px, 2vw, 28px);
+  --ca-max-layout:  1280px;
+  --ca-max-prose:   64ch;
+  --ca-section-pad: clamp(96px, 10vw, 160px);
+  --ca-nav-height:  64px;
+}
+
+/* ─── Page-load animations ─── */
+@keyframes ca-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ca-rule-draw {
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+.ca-page-content {
+  animation: ca-fade-in 400ms ease-out forwards;
+}
+
+/* Heavy rule 1 — draws left→right, fires after fade */
+.ca-section-rule {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--ca-rule-heavy);
+  border: none;
+  clip-path: inset(0 100% 0 0);
+  animation: ca-rule-draw 600ms 300ms ease-out forwards;
+}
+
+/* Static rule before dark CTA section */
+.ca-section-cta-rule {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--ca-rule-heavy);
+  border: none;
+}
+
+/* ─── Root isolation ─── */
+.ca-root {
+  background: var(--ca-bg-ground);
+  color: var(--ca-text-primary);
+  font-family: var(--ca-font-display);
+  min-height: 100dvh;
+}
+
+/* Override Concept B global link styles within Concept A */
+.ca-root a {
+  color: var(--ca-text-primary);
+  text-decoration: none;
+  text-underline-offset: 3px;
+  transition: none;
+}
+
+.ca-root *:focus-visible {
+  outline: 2px solid var(--ca-focus-ring);
+  outline-offset: 4px;
+}
+
+/* ─── Container ─── */
+.ca-container {
+  width: 100%;
+  max-width: var(--ca-max-layout);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(16px, 2.5vw, 32px);
+  padding-right: clamp(16px, 2.5vw, 32px);
+}
+
+/* ─── 12-column grid ─── */
+.ca-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--ca-col-gutter);
+}
+
+/* Column span helpers */
+.ca-col-1    { grid-column: 1 / 2; }
+.ca-col-2-9  { grid-column: 2 / 10; }
+.ca-col-2-13 { grid-column: 2 / 13; }
+.ca-col-10-12 { grid-column: 10 / 13; }
+
+@media (max-width: 767px) {
+  .ca-col-1, .ca-col-2-9, .ca-col-2-13, .ca-col-10-12 {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ─── Section base ─── */
+.ca-section {
+  padding-top: var(--ca-section-pad);
+  padding-bottom: var(--ca-section-pad);
+  background: var(--ca-bg-ground);
+}
+
+.ca-section-alt {
+  background: var(--ca-bg-section-alt);
+}
+
+/* ─── Section number (Barlow Condensed, left margin) ─── */
+.ca-section-num {
+  font-family: var(--ca-font-condensed);
+  font-size: var(--ca-type-2xs);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ca-text-dim);
+  line-height: 1.4;
+  padding-top: 0.35em;
+  display: block;
+}
+
+/* ─── Navigation ─── */
+.ca-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+  transition: background 200ms ease;
+}
+
+.ca-nav.is-scrolled {
+  background: var(--ca-bg-ground);
+}
+
+.ca-nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--ca-nav-height);
+  max-width: var(--ca-max-layout);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 2.5vw, 32px);
+}
+
+.ca-nav-logo {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-sm);
+  font-weight: 700;
+  color: var(--ca-text-primary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.ca-nav-links {
+  display: flex;
+  gap: clamp(24px, 3vw, 48px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ca-nav-link {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-sm);
+  font-weight: 400;
+  color: var(--ca-text-primary);
+  letter-spacing: 0.08em;
+  font-variant: small-caps;
+  text-decoration: none;
+  position: relative;
+}
+
+.ca-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--ca-text-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease;
+}
+
+.ca-nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ─── Hero ─── */
+.ca-hero {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--ca-nav-height);
+  background: var(--ca-bg-ground);
+}
+
+.ca-hero-headline {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-hero);
+  font-weight: 900;
+  color: var(--ca-text-primary);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.6em;
+}
+
+.ca-hero-sub {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-xl);
+  font-weight: 500;
+  color: var(--ca-text-dim);
+  line-height: 1.2;
+  margin: 0 0 1.75em;
+}
+
+.ca-hero-cta {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-base);
+  font-weight: 500;
+  color: var(--ca-text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ca-text-primary);
+  padding-bottom: 2px;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.ca-hero-cta:hover {
+  color: var(--ca-text-dim);
+  border-color: var(--ca-text-dim);
+}
+
+/* ─── Annotation (col 10-12, Barlow Condensed) ─── */
+.ca-annotation {
+  font-family: var(--ca-font-condensed);
+  font-size: var(--ca-type-2xs);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  font-variant: small-caps;
+  color: var(--ca-text-dim);
+  line-height: 1.6;
+}
+
+/* ─── Body text ─── */
+.ca-body {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-base);
+  font-weight: 300;
+  color: var(--ca-text-primary);
+  line-height: 1.85;
+  max-width: var(--ca-max-prose);
+}
+
+/* Pull quote — weight + indentation only, no left border */
+.ca-pull-quote {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-md);
+  font-weight: 400;
+  color: var(--ca-text-primary);
+  line-height: 1.5;
+  margin: 1.5em 0 0;
+  padding: 0;
+  border: none;
+  font-style: normal;
+}
+
+/* ─── Section headline ─── */
+.ca-section-headline {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-xl);
+  font-weight: 700;
+  color: var(--ca-text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* ─── Instruments grid (8 instruments, 2-col at ≥1024px) ─── */
+.ca-instruments-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 48px;
+  margin-top: 3em;
+}
+
+@media (min-width: 1024px) {
+  .ca-instruments-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 64px;
+  }
+}
+
+.ca-instrument-num {
+  font-family: var(--ca-font-condensed);
+  font-size: var(--ca-type-2xs);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--ca-text-dim);
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.ca-instrument-name {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-sm);
+  font-weight: 700;
+  color: var(--ca-text-primary);
+  line-height: 1.4;
+  margin: 0 0 0.4em;
+}
+
+.ca-instrument-body {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-base);
+  font-weight: 300;
+  color: var(--ca-text-dim);
+  line-height: 1.85;
+  margin: 0;
+}
+
+/* ─── Survey process phases ─── */
+.ca-phases {
+  margin-top: 3em;
+}
+
+.ca-phase {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  column-gap: 32px;
+  padding: 40px 0;
+  border-top: 1px solid var(--ca-rule-light);
+}
+
+.ca-phase:last-child {
+  border-bottom: 1px solid var(--ca-rule-light);
+}
+
+.ca-phase-label {
+  font-family: var(--ca-font-condensed);
+  font-size: var(--ca-type-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ca-text-dim);
+  display: block;
+  margin-bottom: 0.4em;
+}
+
+.ca-phase-name {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-lg);
+  font-weight: 700;
+  color: var(--ca-text-primary);
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+}
+
+.ca-phase-body {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-base);
+  font-weight: 300;
+  color: var(--ca-text-dim);
+  line-height: 1.85;
+  max-width: 52ch;
+  margin: 0;
+}
+
+.ca-phase-week {
+  font-family: var(--ca-font-condensed);
+  font-size: var(--ca-type-2xs);
+  font-weight: 400;
+  color: var(--ca-text-dim);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  padding-top: 0.3em;
+}
+
+/* ─── Dispatch cards (2-col grid, heavy border) ─── */
+.ca-dispatches-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 3em;
+}
+
+@media (min-width: 768px) {
+  .ca-dispatches-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ca-dispatch-card {
+  background: var(--ca-bg-ground);
+  border: 1px solid var(--ca-rule-heavy);
+  border-top: 2px solid var(--ca-rule-heavy);
+  border-radius: 0;
+  padding: 32px;
+}
+
+.ca-card-date {
+  font-family: var(--ca-font-condensed);
+  font-size: var(--ca-type-2xs);
+  font-weight: 400;
+  color: var(--ca-text-dim);
+  letter-spacing: 0.1em;
+  font-variant: small-caps;
+  display: block;
+  margin-bottom: 1em;
+}
+
+.ca-card-headline {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-md);
+  font-weight: 500;
+  color: var(--ca-text-primary);
+  line-height: 1.4;
+  margin: 0 0 0.75em;
+}
+
+.ca-card-body {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-base);
+  font-weight: 300;
+  color: var(--ca-text-dim);
+  line-height: 1.85;
+  margin: 0 0 1.5em;
+}
+
+.ca-card-cta {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-sm);
+  font-weight: 500;
+  color: var(--ca-text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ca-text-primary);
+  padding-bottom: 1px;
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.ca-card-cta:hover {
+  color: var(--ca-text-dim);
+  border-color: var(--ca-text-dim);
+}
+
+/* ─── Commission CTA (dark section) ─── */
+.ca-cta-section {
+  background: var(--ca-bg-dark);
+  padding: var(--ca-section-pad) 0;
+}
+
+.ca-cta-inner {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.ca-cta-headline {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-2xl);
+  font-weight: 900;
+  color: var(--ca-text-on-dark);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 1em;
+}
+
+.ca-cta-body {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-md);
+  font-weight: 300;
+  color: var(--ca-text-on-dark);
+  opacity: 0.75;
+  line-height: 1.6;
+  max-width: 52ch;
+  margin: 0 auto 1.5em;
+}
+
+.ca-cta-email {
+  display: block;
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-lg);
+  font-weight: 500;
+  color: var(--ca-text-on-dark);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(250, 250, 248, 0.4);
+  padding-bottom: 2px;
+  margin-bottom: 2em;
+  transition: border-color 200ms ease;
+}
+
+.ca-cta-email:hover {
+  border-color: var(--ca-text-on-dark);
+}
+
+.ca-cta-link {
+  font-family: var(--ca-font-display);
+  font-size: var(--ca-type-base);
+  font-weight: 500;
+  color: var(--ca-text-on-dark);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(250, 250, 248, 0.4);
+  padding-bottom: 2px;
+  transition: border-color 200ms ease;
+}
+
+.ca-cta-link:hover {
+  border-color: var(--ca-text-on-dark);
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .ca-page-content {
+    animation-duration: 0.001ms;
+  }
+  .ca-section-rule {
+    clip-path: none;
+    animation-duration: 0.001ms;
+  }
+  .ca-nav-link::after,
+  .ca-hero-cta,
+  .ca-card-cta,
+  .ca-cta-email,
+  .ca-cta-link {
+    transition-duration: 0.001ms;
+  }
+}

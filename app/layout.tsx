@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
-import SiteNav from "@/components/SiteNav";
-import SiteFooter from "@/components/SiteFooter";
-import FeedbackWidget from "@/components/FeedbackWidget";
+import ConditionalSiteChrome from "@/components/ConditionalSiteChrome";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -51,10 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${newsreader.variable}`}>
       <body>
-        <SiteNav />
-        <main>{children}</main>
-        <SiteFooter />
-        <FeedbackWidget />
+        <ConditionalSiteChrome>{children}</ConditionalSiteChrome>
       </body>
     </html>
   );
