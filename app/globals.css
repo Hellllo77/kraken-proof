@@ -1,166 +1,292 @@
-/* ─── Fonts: Neue Haas Grotesk (via Fontshare) + Tiempos Text (via Fontshare) ─── */
-/* NOTE: Fontshare doesn't carry Neue Haas or Tiempos — these are licensed fonts.
-   Mira will provide the @font-face declarations when the design system lands.
-   Placeholder stacks used below until then. */
 @import "tailwindcss";
 
-/* ─── Design Tokens — Kraken Interactive "The Depth Survey"
-   Status: PLACEHOLDER — Mira's design system will replace these.
-   Palette: parchment + navy + amber
-   Typography: Neue Haas Grotesk (display/UI) + Tiempos Text (editorial body)
+/* ─── Design Tokens — KRAKEN Interactive "The Depth Survey"
+   Primitives: exact Mira hex values (design-direction.md §1)
+   Dev fonts: DM Sans (display) + Newsreader (body) via next/font/google
+   Production fonts: Neue Haas Grotesk Display + Tiempos Text (licensed)
 ─── */
 :root {
-  /* Parchment — warm off-white ground */
-  --color-parchment-100: #faf8f2;   /* page background */
-  --color-parchment-200: #f4f0e4;   /* elevated surfaces, card bg */
-  --color-parchment-300: #e8e0cc;   /* borders, dividers */
-  --color-parchment-400: #d4c9ae;   /* muted borders */
+  /* Primitives */
+  --parchment-100: #F4EFE6;
+  --parchment-200: #EBE4D6;
+  --parchment-300: #D8CFBC;
+  --parchment-400: #C4B99F;
+  --navy-900:      #0D1B2A;
+  --navy-800:      #12263C;
+  --navy-700:      #1A3A5C;
+  --navy-600:      #234E7A;
+  --amber-500:     #C6862E;
+  --amber-400:     #D89B40;
+  --amber-300:     #E8B55A;
+  --depth-blue-600:#2A5285;
+  --depth-blue-500:#3A6EA5;
+  --depth-blue-400:#5288BC;
 
-  /* Navy — primary ink */
-  --color-navy-900: #0d1b2a;        /* primary text, headlines */
-  --color-navy-800: #1b2d42;        /* body text */
-  --color-navy-700: #243b55;        /* secondary text */
-  --color-navy-600: #2e4d70;        /* interactive elements, links */
-  --color-navy-400: #4a7399;        /* muted interactive, captions */
+  /* Semantic tokens */
+  --color-bg-ground:      var(--parchment-100);
+  --color-bg-alt:         var(--parchment-200);
+  --color-bg-card:        var(--parchment-300);
+  --color-bg-dark:        var(--navy-900);
+  --color-bg-dark-raised: var(--navy-800);
+  --color-text-primary:   var(--navy-900);
+  --color-text-secondary: var(--navy-700);
+  --color-text-annot:     var(--depth-blue-500);
+  --color-text-on-dark:   var(--parchment-100);
+  --color-text-on-dark-dim: var(--parchment-400);
+  --color-accent-amber:   var(--amber-500);
+  --color-accent-depth:   var(--depth-blue-500);
+  --color-contour:        var(--depth-blue-500);
+  --color-contour-dim:    var(--depth-blue-400);
+  --color-focus-ring:     var(--amber-500);
 
-  /* Amber — accent (survey notations, active state, highlights) */
-  --color-amber-600: #b45309;       /* primary amber */
-  --color-amber-500: #d97706;       /* hover state */
-  --color-amber-400: #f59e0b;       /* bright accent */
-  --color-amber-200: #fde68a;       /* tint, annotation bg */
-  --color-amber-100: #fffbeb;       /* very faint amber wash */
+  /* Legacy aliases — used by Felix's scaffold components */
+  --color-parchment-100: var(--parchment-100);
+  --color-parchment-200: var(--parchment-200);
+  --color-parchment-300: var(--parchment-300);
+  --color-parchment-400: var(--parchment-400);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-navy-600: var(--navy-600);
+  --color-navy-500: var(--depth-blue-600);
+  --color-navy-400: var(--depth-blue-400);
+  --color-amber-600: var(--amber-500);
+  --color-amber-500: var(--amber-500);
+  --color-amber-400: var(--amber-400);
+  --color-amber-200: var(--amber-300);
+  --color-amber-100: #FFF8ED;
 
-  /* Typography */
-  --font-display: 'Neue Haas Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-body:    'Tiempos Text', 'Georgia', serif;
+  /* Typography — CSS vars injected by next/font in layout.tsx */
+  --font-display: var(--font-dm-sans, 'DM Sans', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif);
+  --font-body:    var(--font-newsreader, 'Newsreader', 'Source Serif 4', Georgia, serif);
   --font-mono:    'JetBrains Mono', 'Courier New', monospace;
 
-  --type-hero:    clamp(3rem, 6vw, 6rem);
-  --type-display: clamp(2rem, 3.5vw, 3.5rem);
-  --type-heading: clamp(1.375rem, 2vw, 2rem);
-  --type-subhead: 1.125rem;
-  --type-body:    1rem;
-  --type-sm:      0.875rem;
-  --type-xs:      0.75rem;
-  --type-label:   0.6875rem;
+  /* Type scale — Mira's exact fluid clamp values */
+  --type-2xs:  clamp(0.625rem,  0.55rem + 0.25vw,  0.75rem);
+  --type-xs:   clamp(0.6875rem, 0.625rem + 0.3vw,  0.8125rem);
+  --type-sm:   clamp(0.8125rem, 0.75rem + 0.3vw,   0.9375rem);
+  --type-base: clamp(0.9375rem, 0.875rem + 0.4vw,  1.0625rem);
+  --type-md:   clamp(1.0625rem, 1rem + 0.4vw,      1.1875rem);
+  --type-lg:   clamp(1.25rem,   1.125rem + 0.75vw, 1.5rem);
+  --type-xl:   clamp(1.5rem,    1.25rem + 1.25vw,  2rem);
+  --type-2xl:  clamp(2rem,      1.5rem + 2.5vw,    3rem);
+  --type-3xl:  clamp(2.75rem,   2rem + 3.5vw,      4.5rem);
+  --type-hero: clamp(3.5rem,    2.5rem + 5vw,      6rem);
 
+  /* Felix scaffold aliases */
+  --type-display: var(--type-3xl);
+  --type-heading: var(--type-2xl);
+  --type-subhead: var(--type-lg);
+  --type-body:    var(--type-base);
+  --type-label:   var(--type-2xs);
+
+  /* Line heights + letter spacing */
   --lh-tight:   1.1;
   --lh-heading: 1.25;
-  --lh-body:    1.7;
+  --lh-body:    1.75;
   --ls-label:   0.1em;
+  --ls-caps:    0.08em;
   --ls-heading: -0.02em;
 
-  /* Spacing */
-  --space-1:  8px;
-  --space-2:  16px;
-  --space-3:  24px;
-  --space-4:  32px;
-  --space-6:  48px;
-  --space-8:  64px;
-  --space-12: 96px;
-  --space-16: 128px;
+  /* Spacing — Mira 4px base */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
 
-  --gap-section: clamp(64px, 8vw, 128px);
+  --section-pad-v: clamp(80px, 8vw, 128px);
+  --max-prose:     68ch;
+  --max-layout:    1200px;
+  --nav-height:    64px;
 
-  /* Radii */
-  --radius-sm:   2px;
-  --radius-md:   4px;
+  /* Motion tokens */
+  --ease-survey-in:    cubic-bezier(0.4, 0, 1, 1);
+  --ease-survey-out:   cubic-bezier(0, 0, 0.2, 1);
+  --ease-survey-inout: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-line-draw:    cubic-bezier(0.6, 0, 0.4, 1);
+
+  --dur-instant:     80ms;
+  --dur-fast:       160ms;
+  --dur-standard:   320ms;
+  --dur-deliberate: 500ms;
+  --dur-draw:       800ms;
+  --dur-hero:      2000ms;
+
+  /* Felix aliases */
+  --ease-out-expo: var(--ease-survey-out);
+  --ease-in-out:   var(--ease-survey-inout);
+  --dur-base: var(--dur-standard);
+  --dur-slow: var(--dur-draw);
+
+  /* Radii — sharp (cartographic precision) */
+  --radius-sm:   0px;
+  --radius-md:   0px;
   --radius-pill: 9999px;
 
-  /* Easing */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out:   cubic-bezier(0.76, 0, 0.24, 1);
-
-  /* Timing */
-  --dur-fast:  200ms;
-  --dur-base:  400ms;
-  --dur-slow:  700ms;
+  /* Section padding alias */
+  --gap-section: var(--section-pad-v);
 }
 
 /* ─── Reset ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
-  background: var(--color-parchment-100);
-  color: var(--color-navy-800);
+  background: var(--color-bg-ground);
+  color: var(--color-text-primary);
   font-family: var(--font-body);
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--color-parchment-100);
+  background: var(--color-bg-ground);
   overflow-x: hidden;
   min-height: 100dvh;
 }
 
 /* ─── Focus rings ─── */
 :focus-visible {
-  outline: 2px solid var(--color-amber-600);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
 }
 
-/* ─── Content container ─── */
+/* ─── Container ─── */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--max-layout);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--space-4);
-  padding-right: var(--space-4);
-}
-@media (min-width: 768px) {
-  .container { padding-left: var(--space-8); padding-right: var(--space-8); }
+  padding-left: clamp(16px, 2.5vw, 32px);
+  padding-right: clamp(16px, 2.5vw, 32px);
 }
 
-/* ─── Typography helpers ─── */
-.depth-notation {
-  font-family: var(--font-display);
-  font-size: var(--type-label);
-  font-weight: 600;
-  letter-spacing: var(--ls-label);
-  text-transform: uppercase;
-  color: var(--color-amber-600);
-}
-
-.field-note {
-  border-left: 2px solid var(--color-amber-400);
-  padding-left: var(--space-3);
-  background: var(--color-amber-100);
-}
-
-/* ─── SVG contour draw-in ─── */
-.contour-path {
-  stroke-dashoffset: 1;
-  transition: stroke-dashoffset var(--dur-slow) var(--ease-out-expo);
-}
-.contour-path.is-drawn {
-  stroke-dashoffset: 0;
-}
-
-/* ─── Section spacing ─── */
+/* ─── Section ─── */
 .section {
-  padding-top: var(--gap-section);
-  padding-bottom: var(--gap-section);
+  padding-top: var(--section-pad-v);
+  padding-bottom: var(--section-pad-v);
 }
 
-/* ─── Link ─── */
+/* ─── Links ─── */
 a {
   color: var(--color-navy-600);
   text-decoration: underline;
-  text-decoration-color: var(--color-parchment-300);
+  text-decoration-color: var(--parchment-300);
   text-underline-offset: 3px;
-  transition: text-decoration-color var(--dur-fast);
+  transition: text-decoration-color var(--dur-fast) var(--ease-survey-out),
+              color var(--dur-fast) var(--ease-survey-out);
 }
 a:hover {
-  text-decoration-color: var(--color-amber-600);
+  text-decoration-color: var(--color-accent-amber);
 }
 
-/* ─── Reduced motion ─── */
+/* ─── Depth notation (survey annotation style) ─── */
+.depth-notation {
+  font-family: var(--font-display);
+  font-size: var(--type-2xs);
+  font-weight: 600;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--color-text-annot);
+  line-height: 1.4;
+}
+
+/* ─── Field note block ─── */
+.field-note {
+  border-left: 3px solid var(--amber-500);
+  padding-left: var(--space-6);
+  background: transparent;
+}
+
+/* ─── Contour draw-in (CSS — no GSAP required for initial build) ─── */
+.contour-path {
+  stroke-dashoffset: 1;
+  stroke-dasharray: 1;
+}
+.contour-path.is-drawn {
+  animation: contour-draw var(--dur-draw) var(--ease-line-draw) forwards;
+}
+@keyframes contour-draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ─── Scroll reveal ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--dur-deliberate) var(--ease-survey-out),
+              transform var(--dur-deliberate) var(--ease-survey-out);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered rows (section 3 instruments) */
+.reveal-row {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--dur-deliberate) var(--ease-survey-out),
+              transform var(--dur-deliberate) var(--ease-survey-out);
+}
+.reveal-row.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Depth mark slide-in */
+.depth-mark {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity var(--dur-standard) var(--ease-survey-out),
+              transform var(--dur-standard) var(--ease-survey-out);
+}
+.depth-mark.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─── Ghost CTA button (sharp corners — cartographic) ─── */
+.btn-ghost {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--type-sm);
+  font-weight: 500;
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--color-text-on-dark);
+  border: 1px solid var(--parchment-400);
+  padding: 16px 32px;
+  text-decoration: none;
+  transition: border-color var(--dur-fast) var(--ease-survey-out),
+              color var(--dur-fast) var(--ease-survey-out);
+}
+.btn-ghost:hover {
+  border-color: var(--color-accent-amber);
+  color: var(--color-accent-amber);
+  text-decoration: none;
+}
+
+/* ─── Reduced motion (hard compliance) ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     transition-duration: 0.001ms !important;
     animation-duration: 0.001ms !important;
   }
-  .contour-path { stroke-dashoffset: 0; }
+  .contour-path { stroke-dashoffset: 0 !important; animation: none !important; }
+  .reveal, .reveal-row, .depth-mark {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
