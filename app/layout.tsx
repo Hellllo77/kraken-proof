@@ -21,12 +21,28 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://kraken.com.my"),
   title: {
     default:  "Kraken Interactive — Strategic Intelligence Consultancy",
     template: "%s — Kraken Interactive",
   },
   description:
     "We build reliable maps of the strategic terrain before any recommendation is made. Strategic intelligence consultancy since 2010.",
+  openGraph: {
+    siteName: "Kraken Interactive",
+    images: [
+      {
+        url: "/assets/hero-poster-v2.jpg",
+        width: 1920,
+        height: 1080,
+        alt: "KRAKEN Interactive — Strategic Intelligence Consultancy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/assets/hero-poster-v2.jpg"],
+  },
 };
 
 export default function RootLayout({

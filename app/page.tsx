@@ -7,6 +7,10 @@ import ClientHeroContour from "@/components/ClientHeroContour";
 
 export const metadata: Metadata = {
   title: "There are no reliable charts for the strategic terrain of a growing business.",
+  openGraph: {
+    title: "Kraken Interactive — Strategic Intelligence Consultancy",
+    description: "We map the strategic terrain before we advise. Since 2010, Malaysia + SEA.",
+  },
 };
 
 // Real PRD capability names (research-lead idx4925 — locked)
@@ -44,7 +48,7 @@ const PHASES = [
     depthMark: "—260m",
     zone: "RECOMMEND",
     timeline: "W5–10",
-    isAmber: true,  // amber contour — deepest analytical phase
+    isAmber: true,
     desc: "Recommendations grounded in the terrain we have mapped, not in frameworks imported from other engagements. Each identifies the leverage point, the evidence base, and the implementation dependencies.",
   },
   {
@@ -86,56 +90,79 @@ export default async function HomePage() {
     <>
       {/* ══════════════════════════════════════
           §1 — HERO
-          Ground: parchment-100 / full viewport
-          Layers: contour SVG (back) → content (front)
+          Layer stack (Mira manifest idx63):
+          1) hero ambient video (18% opacity)
+          2) contour SVG (z-index 2)
+          3) content (z-index 10)
       ══════════════════════════════════════ */}
       <section
         style={{
           position: "relative",
           minHeight: "100svh",
           background: "var(--parchment-100)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
           overflow: "hidden",
-          paddingTop: "var(--nav-height)",
+          paddingTop: "calc(var(--nav-height) + var(--space-16))",
+          paddingBottom: "var(--space-24)",
         }}
       >
-        {/* Contour SVG background — animated on load (client-only) */}
-        <ClientHeroContour />
+        {/* Layer 1 — hero ambient video (18% opacity, z-index 1) */}
+        <div className="hero__bg" aria-hidden="true">
+          <video
+            className="hero__video"
+            autoPlay
+            muted
+            playsInline
+            loop
+            poster="/assets/hero-poster-v2.jpg"
+          >
+            <source src="/assets/hero-ambient-v2.mp4" type="video/mp4" />
+          </video>
+          {/* Reduced-motion fallback: static poster at same opacity */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="hero__poster"
+            src="/assets/hero-poster-v2.jpg"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
 
-        {/* Content layer */}
+        {/* Layer 2 — Contour SVG (z-index 2, inside absolute wrapper) */}
+        <div
+          aria-hidden="true"
+          style={{ position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none" }}
+        >
+          <ClientHeroContour />
+        </div>
+
+        {/* Layer 3 — Content (z-index 10) */}
         <div
           className="container"
-          style={{
-            position: "relative",
-            zIndex: 2,
-            paddingTop: "var(--space-32)",
-            paddingBottom: "var(--space-32)",
-          }}
+          style={{ position: "relative", zIndex: 10 }}
         >
-          {/* Depth notation — top label */}
+          {/* Depth notation — right-aligned, top of content */}
           <p
             className="depth-notation"
-            style={{ marginBottom: "var(--space-8)", color: "var(--depth-blue-500)" }}
+            style={{
+              color: "var(--depth-blue-500)",
+              textAlign: "right",
+              marginBottom: "var(--space-8)",
+            }}
           >
-            Survey Depth: Strategic Terrain
-            <span style={{ marginLeft: "var(--space-6)", color: "var(--amber-500)" }}>
-              —40m UNDERSTAND
-            </span>
+            Survey Depth: Strategic Terrain&nbsp;&nbsp;
+            <span style={{ color: "var(--amber-500)" }}>—40m UNDERSTAND</span>
           </p>
 
-          {/* Headline — max 10 words across 3 lines */}
+          {/* Headline — 3 lines in navy. type-2xl keeps each forced line on one line at common viewports */}
           <h1
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "var(--type-hero)",
+              fontSize: "var(--type-2xl)",
               fontWeight: 700,
               color: "var(--navy-900)",
               lineHeight: "var(--lh-tight)",
               letterSpacing: "var(--ls-heading)",
-              maxWidth: "900px",
-              marginBottom: "var(--space-6)",
+              marginBottom: "var(--space-4)",
             }}
           >
             There are no reliable charts
@@ -143,16 +170,16 @@ export default async function HomePage() {
             <br />of a growing business.
           </h1>
 
-          {/* "We make them." — amber accent line */}
+          {/* "We make them." — amber amber payoff, type-3xl > headline for visual hierarchy */}
           <p
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "var(--type-hero)",
+              fontSize: "var(--type-3xl)",
               fontWeight: 700,
               color: "var(--amber-500)",
               lineHeight: "var(--lh-tight)",
               letterSpacing: "var(--ls-heading)",
-              marginBottom: "var(--space-12)",
+              marginBottom: "var(--space-10)",
             }}
           >
             We make them.
@@ -198,34 +225,24 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Section separator — depth-blue contour, amber rule */}
+      {/* Section separator */}
       <div style={{ height: "1px", background: "var(--depth-blue-500)", opacity: 0.2 }} />
 
       {/* ══════════════════════════════════════
           §2 — FIELD NOTE (What We Map)
           Ground: parchment-100
-          Layout: 7/5 col split (content / annotation)
+          Layout: .editorial-split (7/5 responsive)
       ══════════════════════════════════════ */}
-      <section
-        className="section"
-        style={{ background: "var(--parchment-100)" }}
-      >
+      <section className="section" style={{ background: "var(--parchment-100)" }}>
         <div className="container">
           {/* Amber + navy double rule — chart boundary mark */}
           <div style={{ height: "6px", background: "var(--amber-500)", marginBottom: "2px" }} />
           <div style={{ height: "1px", background: "var(--navy-900)", marginBottom: "var(--space-16)" }} />
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: "var(--space-12)",
-            }}
-          >
+          <div className="editorial-split">
             {/* 7-col content */}
-            <div style={{ maxWidth: "760px" }}>
+            <div>
               <RevealOnScroll>
-                {/* Pull quote */}
                 <blockquote className="field-note" style={{ marginBottom: "var(--space-8)" }}>
                   <p
                     style={{
@@ -241,7 +258,20 @@ export default async function HomePage() {
                   </p>
                 </blockquote>
 
-                {/* Body copy — idx4925 locked */}
+                <p
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: "var(--type-base)",
+                    color: "var(--navy-700)",
+                    lineHeight: "var(--lh-body)",
+                    maxWidth: "var(--max-prose)",
+                    marginBottom: "var(--space-6)",
+                  }}
+                >
+                  Most organisations arrive at KRAKEN with a solution already in hand. A new system.
+                  A rebrand. A campaign. Before we design anything, we survey.
+                </p>
+
                 <p
                   style={{
                     fontFamily: "var(--font-body)",
@@ -251,14 +281,21 @@ export default async function HomePage() {
                     maxWidth: "var(--max-prose)",
                   }}
                 >
-                  Most organisations arrive at KRAKEN with a solution already in hand. A new system.
-                  A rebrand. A campaign. Before we design anything, we survey.
+                  We enter every engagement without a predetermined hypothesis. The brief we receive
+                  on day one is rarely the brief we act on by week two. That gap — between the
+                  presented problem and the actual one — is where KRAKEN operates.
                 </p>
               </RevealOnScroll>
             </div>
 
             {/* 5-col annotation */}
-            <RevealOnScroll delay={120} style={{ borderLeft: "1px solid var(--amber-500)", paddingLeft: "var(--space-6)" }}>
+            <RevealOnScroll
+              delay={120}
+              style={{
+                borderLeft: "1px solid var(--amber-500)",
+                paddingLeft: "var(--space-6)",
+              }}
+            >
               <p className="depth-notation" style={{ marginBottom: "var(--space-3)" }}>
                 Field Note
               </p>
@@ -271,16 +308,42 @@ export default async function HomePage() {
                   textTransform: "uppercase",
                   color: "var(--depth-blue-500)",
                   lineHeight: 1.8,
-                  marginBottom: "var(--space-4)",
+                  marginBottom: "var(--space-8)",
                 }}
               >
                 Kraken Interactive<br />
                 Precision strategic advisory.<br />
                 Since 2010, Malaysia + SEA.
               </p>
-              <p className="depth-notation" style={{ color: "var(--depth-blue-500)" }}>
+              <p className="depth-notation" style={{ color: "var(--depth-blue-500)", marginBottom: "var(--space-10)" }}>
                 —120m OBSERVE
               </p>
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "var(--type-xs)",
+                    fontWeight: 600,
+                    letterSpacing: "var(--ls-label)",
+                    textTransform: "uppercase",
+                    color: "var(--amber-500)",
+                    marginBottom: "var(--space-2)",
+                  }}
+                >
+                  The survey method
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-body)",
+                    fontSize: "var(--type-sm)",
+                    color: "var(--navy-700)",
+                    lineHeight: "var(--lh-body)",
+                  }}
+                >
+                  Eight instruments. One integrated system. No arm operates in isolation — the
+                  complete picture requires all eight.
+                </p>
+              </div>
             </RevealOnScroll>
           </div>
         </div>
@@ -288,12 +351,11 @@ export default async function HomePage() {
 
       {/* ══════════════════════════════════════
           §3 — EIGHT ARMS (dark navy, full bleed)
-          Ground: navy-900
-          Headline: "Eight arms. / One system."
+          section3-navy-texture @6% multiply via .section-instruments::before
       ══════════════════════════════════════ */}
       <section
+        className="section-instruments"
         style={{
-          background: "var(--navy-900)",
           paddingTop: "var(--space-32)",
           paddingBottom: "var(--space-32)",
         }}
@@ -328,69 +390,74 @@ export default async function HomePage() {
 
           {/* Instrument grid — 2 col × 4 rows */}
           <InstrumentReveal staggerCount={INSTRUMENTS.length}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "0",
-            }}
-          >
-            {INSTRUMENTS.map((inst, i) => (
-              <div
-                key={inst.id}
-                className="reveal-row"
-                style={{
-                  borderTop: `1px solid var(--navy-700)`,
-                  borderRight: i % 2 === 0 ? "1px solid var(--navy-700)" : "none",
-                  padding: "var(--space-8) var(--space-6)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "var(--space-2)",
-                  animationDelay: `${i * 60}ms`,
-                }}
-              >
-                {/* Contour depth mark */}
-                <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", marginBottom: "var(--space-1)" }}>
-                  <div style={{ width: "1px", height: "24px", background: inst.id === "01" ? "var(--amber-500)" : "var(--depth-blue-500)", opacity: 0.6 }} />
-                  <span
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: "0",
+              }}
+            >
+              {INSTRUMENTS.map((inst, i) => (
+                <div
+                  key={inst.id}
+                  className="reveal-row"
+                  style={{
+                    borderTop: "1px solid var(--navy-700)",
+                    borderRight: i % 2 === 0 ? "1px solid var(--navy-700)" : "none",
+                    padding: "var(--space-8) var(--space-6)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "var(--space-2)",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "var(--space-2)", marginBottom: "var(--space-1)" }}>
+                    <div
+                      style={{
+                        width: "1px",
+                        height: "24px",
+                        background: inst.id === "01" ? "var(--amber-500)" : "var(--depth-blue-500)",
+                        opacity: 0.6,
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "var(--type-2xs)",
+                        fontWeight: 600,
+                        letterSpacing: "var(--ls-label)",
+                        textTransform: "uppercase",
+                        color: inst.id === "01" ? "var(--amber-500)" : "var(--depth-blue-400)",
+                      }}
+                    >
+                      {inst.id}
+                    </span>
+                  </div>
+                  <h3
                     style={{
                       fontFamily: "var(--font-display)",
-                      fontSize: "var(--type-2xs)",
+                      fontSize: "var(--type-sm)",
                       fontWeight: 600,
-                      letterSpacing: "var(--ls-label)",
+                      color: inst.id === "01" ? "var(--amber-500)" : "var(--parchment-100)",
+                      letterSpacing: "0.04em",
                       textTransform: "uppercase",
-                      color: inst.id === "01" ? "var(--amber-500)" : "var(--depth-blue-400)",
                     }}
                   >
-                    {inst.id}
-                  </span>
+                    {inst.name}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontSize: "var(--type-sm)",
+                      color: "var(--parchment-400)",
+                      lineHeight: "var(--lh-body)",
+                      opacity: 0.85,
+                    }}
+                  >
+                    {inst.desc}
+                  </p>
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "var(--type-sm)",
-                    fontWeight: 600,
-                    color: inst.id === "01" ? "var(--amber-500)" : "var(--parchment-100)",
-                    letterSpacing: "0.04em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {inst.name}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: "var(--type-sm)",
-                    color: "var(--parchment-400)",
-                    lineHeight: "var(--lh-body)",
-                    opacity: 0.85,
-                  }}
-                >
-                  {inst.desc}
-                </p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
           </InstrumentReveal>
 
           <RevealOnScroll style={{ marginTop: "var(--space-12)" }}>
@@ -417,12 +484,8 @@ export default async function HomePage() {
       {/* ══════════════════════════════════════
           §4 — HOW A SURVEY WORKS (4 phases)
           Ground: parchment-200
-          Depth marks animate in on scroll
       ══════════════════════════════════════ */}
-      <section
-        className="section"
-        style={{ background: "var(--parchment-200)" }}
-      >
+      <section className="section" style={{ background: "var(--parchment-200)" }}>
         <div className="container">
           <RevealOnScroll>
             <h2
@@ -443,7 +506,6 @@ export default async function HomePage() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             {PHASES.map((p, i) => (
               <RevealOnScroll key={p.phase} delay={i * 80}>
-                {/* Phase separator line — amber for Recommend phase, depth-blue for others */}
                 <div
                   style={{
                     height: "1px",
@@ -452,7 +514,6 @@ export default async function HomePage() {
                     marginBottom: "var(--space-6)",
                   }}
                 />
-
                 <div
                   style={{
                     display: "grid",
@@ -462,7 +523,6 @@ export default async function HomePage() {
                     alignItems: "start",
                   }}
                 >
-                  {/* Phase label + timeline */}
                   <div>
                     <p
                       style={{
@@ -489,7 +549,6 @@ export default async function HomePage() {
                     </p>
                   </div>
 
-                  {/* Phase description */}
                   <p
                     style={{
                       fontFamily: "var(--font-body)",
@@ -502,7 +561,6 @@ export default async function HomePage() {
                     {p.desc}
                   </p>
 
-                  {/* Depth mark — right margin, slides in on scroll */}
                   <p
                     className="depth-mark is-visible"
                     style={{
@@ -522,7 +580,6 @@ export default async function HomePage() {
               </RevealOnScroll>
             ))}
 
-            {/* Double amber rule — section close */}
             <div style={{ height: "6px", background: "var(--amber-500)" }} />
             <div style={{ height: "1px", background: "var(--amber-500)", marginTop: "2px" }} />
           </div>
@@ -532,12 +589,9 @@ export default async function HomePage() {
       {/* ══════════════════════════════════════
           §5 — DISPATCHES FROM THE FIELD
           Ground: parchment-100
-          Empty state when no published dispatches (idx4925)
+          Empty state when no published dispatches
       ══════════════════════════════════════ */}
-      <section
-        className="section"
-        style={{ background: "var(--parchment-100)" }}
-      >
+      <section className="section" style={{ background: "var(--parchment-100)" }}>
         <div className="container">
           <RevealOnScroll>
             <h2
@@ -572,7 +626,6 @@ export default async function HomePage() {
                         padding: "var(--space-8)",
                       }}
                     >
-                      {/* Amber top rule */}
                       <div style={{ height: "1px", background: "var(--amber-500)", marginBottom: "var(--space-6)" }} />
                       <p
                         style={{
@@ -632,7 +685,6 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            /* Empty state — idx4925 Option a */
             <RevealOnScroll>
               <div
                 style={{
@@ -678,6 +730,7 @@ export default async function HomePage() {
       {/* ══════════════════════════════════════
           §6 — COMMISSION A SURVEY (CTA)
           Ground: navy-900, full bleed
+          capabilities-bg as P3 CTA placeholder bg
       ══════════════════════════════════════ */}
       <section
         style={{
@@ -689,7 +742,22 @@ export default async function HomePage() {
           overflow: "hidden",
         }}
       >
-        {/* Echo contour SVG — 8% opacity, visual loop close */}
+        {/* P3 CTA bg placeholder — capabilities-bg at 8% until CTA video generates */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: "url('/assets/capabilities-bg.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.06,
+            mixBlendMode: "screen",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Echo contour SVG */}
         <svg
           aria-hidden="true"
           viewBox="0 0 1440 400"
@@ -712,7 +780,6 @@ export default async function HomePage() {
 
         <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: "720px" }}>
           <RevealOnScroll>
-            {/* Section label */}
             <p
               style={{
                 fontFamily: "var(--font-display)",
@@ -728,7 +795,6 @@ export default async function HomePage() {
               Commission a Survey
             </p>
 
-            {/* Depth rule */}
             <div
               style={{
                 display: "flex",
@@ -743,7 +809,6 @@ export default async function HomePage() {
               <div style={{ height: "1px", width: "60px", background: "var(--depth-blue-600)" }} />
             </div>
 
-            {/* Body copy */}
             <p
               style={{
                 fontFamily: "var(--font-body)",
@@ -759,7 +824,6 @@ export default async function HomePage() {
               terrain map no internal team can generate alone.
             </p>
 
-            {/* Email — amber, italic, Tiempos */}
             <a
               href="mailto:hello@kraken.com.my"
               style={{
@@ -778,7 +842,6 @@ export default async function HomePage() {
               hello@kraken.com.my
             </a>
 
-            {/* Ghost CTA button */}
             <Link href="/contact" className="btn-ghost">
               Commission a survey →
             </Link>

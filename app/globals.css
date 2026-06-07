@@ -278,6 +278,90 @@ a:hover {
   text-decoration: none;
 }
 
+/* ─── Hero layer system (Mira asset manifest idx63) ─── */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.18;
+  pointer-events: none;
+}
+/* Reduced-motion poster: shown instead of video */
+.hero__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.18;
+  display: none;
+  pointer-events: none;
+}
+
+/* ─── Editorial 7/5 split (responsive) ─── */
+.editorial-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+}
+@media (min-width: 820px) {
+  .editorial-split {
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+  }
+}
+
+/* ─── §3 dark instruments — navy texture pseudo ─── */
+.section-instruments {
+  position: relative;
+  background-color: var(--navy-900);
+}
+.section-instruments::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/section3-navy-texture.jpg');
+  background-size: cover;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+.section-instruments > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Capabilities diagram bg — bathymetric texture pseudo ─── */
+.section-capabilities-diagram {
+  position: relative;
+  background-color: var(--navy-900);
+}
+.section-capabilities-diagram::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/capabilities-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+}
+.section-capabilities-diagram > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* ─── Reduced motion (hard compliance) ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -289,4 +373,6 @@ a:hover {
     opacity: 1 !important;
     transform: none !important;
   }
+  .hero__video { display: none; }
+  .hero__poster { display: block; }
 }
