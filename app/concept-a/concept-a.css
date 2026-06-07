@@ -1,31 +1,44 @@
-/* Concept A: Restrained Authority — isolated styles, --ca-* namespace */
-/* No amber. No imagery. No animation beyond spec. */
+/* Concept A Immersive: "The Commission at Depth" */
+/* Dark navy ground — distinctly different from both Concept A restrained and Concept B parchment */
 
 /* ─── Tokens ─── */
 :root {
-  --ca-bg-ground:      #FAFAF8;
-  --ca-bg-section-alt: #F4F4F0;
-  --ca-bg-dark:        #0D1B2A;
-  --ca-text-primary:   #0D1B2A;
-  --ca-text-dim:       #3A5472;
-  --ca-text-on-dark:   #FAFAF8;
-  --ca-rule-light:     #E4E4DF;
-  --ca-rule-heavy:     #0D1B2A;
-  --ca-focus-ring:     #0D1B2A;
+  /* Ground — navy dominant */
+  --ca-bg-ground:      #0D1B2A;
+  --ca-bg-section-alt: #0A1520;
+  --ca-bg-raised:      #12263C;
 
-  --ca-font-display:   var(--font-ca-barlow, 'Barlow', system-ui, sans-serif);
+  /* Text — light on dark */
+  --ca-text-primary:   #F4EFE6;
+  --ca-text-dim:       #A8BAC8;
+  --ca-text-annotation:#3A6EA5;
+
+  /* Accent — light sources against dark, not fills */
+  --ca-amber:          #C6862E;
+  --ca-depth-blue:     #3A6EA5;
+
+  /* Rules */
+  --ca-rule:           rgba(58, 110, 165, 0.25);
+  --ca-rule-amber:     rgba(198, 134, 46, 0.40);
+
+  /* Grain */
+  --ca-grain-opacity:  0.18;
+
+  /* Type */
+  --ca-font:           var(--font-ca-barlow, 'Barlow', system-ui, sans-serif);
   --ca-font-condensed: var(--font-ca-barlow-condensed, 'Barlow Condensed', 'Barlow', system-ui, sans-serif);
 
-  --ca-type-2xs:  clamp(0.625rem, 0.55rem + 0.2vw, 0.6875rem);
-  --ca-type-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
-  --ca-type-sm:   clamp(0.875rem, 0.8rem + 0.3vw, 0.9375rem);
-  --ca-type-base: clamp(0.9375rem, 0.875rem + 0.3vw, 1rem);
-  --ca-type-md:   clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
-  --ca-type-lg:   clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
-  --ca-type-xl:   clamp(2rem, 1.5rem + 2.5vw, 3rem);
-  --ca-type-2xl:  clamp(3rem, 2rem + 4vw, 5rem);
   --ca-type-hero: clamp(4rem, 2.5rem + 7vw, 7rem);
+  --ca-type-2xl:  clamp(3rem, 2rem + 4vw, 5rem);
+  --ca-type-xl:   clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  --ca-type-lg:   clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
+  --ca-type-md:   clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --ca-type-base: clamp(0.9375rem, 0.875rem + 0.3vw, 1rem);
+  --ca-type-sm:   clamp(0.875rem, 0.8rem + 0.3vw, 0.9375rem);
+  --ca-type-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --ca-type-2xs:  clamp(0.625rem, 0.55rem + 0.2vw, 0.6875rem);
 
+  /* Layout */
   --ca-col-gutter:  clamp(16px, 2vw, 28px);
   --ca-max-layout:  1280px;
   --ca-max-prose:   64ch;
@@ -33,49 +46,21 @@
   --ca-nav-height:  64px;
 }
 
-/* ─── Page-load animations ─── */
-@keyframes ca-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes ca-rule-draw {
-  to { clip-path: inset(0 0% 0 0); }
-}
-
-.ca-page-content {
-  animation: ca-fade-in 400ms ease-out forwards;
-}
-
-/* Heavy rule 1 — draws left→right, fires after fade */
-.ca-section-rule {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: var(--ca-rule-heavy);
-  border: none;
-  clip-path: inset(0 100% 0 0);
-  animation: ca-rule-draw 600ms 300ms ease-out forwards;
-}
-
-/* Static rule before dark CTA section */
-.ca-section-cta-rule {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: var(--ca-rule-heavy);
-  border: none;
-}
-
 /* ─── Root isolation ─── */
 .ca-root {
   background: var(--ca-bg-ground);
   color: var(--ca-text-primary);
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   min-height: 100dvh;
 }
 
-/* Override Concept B global link styles within Concept A */
+/* Override Concept B body/html bg for concept-a pages */
+body:has(.ca-root),
+html:has(.ca-root) {
+  background: var(--ca-bg-ground);
+}
+
+/* Override Concept B global link styles */
 .ca-root a {
   color: var(--ca-text-primary);
   text-decoration: none;
@@ -84,7 +69,7 @@
 }
 
 .ca-root *:focus-visible {
-  outline: 2px solid var(--ca-focus-ring);
+  outline: 2px solid var(--ca-amber);
   outline-offset: 4px;
 }
 
@@ -105,7 +90,6 @@
   gap: var(--ca-col-gutter);
 }
 
-/* Column span helpers */
 .ca-col-1    { grid-column: 1 / 2; }
 .ca-col-2-9  { grid-column: 2 / 10; }
 .ca-col-2-13 { grid-column: 2 / 13; }
@@ -128,20 +112,20 @@
   background: var(--ca-bg-section-alt);
 }
 
-/* ─── Section number (Barlow Condensed, left margin) ─── */
+/* ─── Section number (Barlow Condensed, annotation color) ─── */
 .ca-section-num {
   font-family: var(--ca-font-condensed);
   font-size: var(--ca-type-2xs);
   font-weight: 400;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ca-text-dim);
+  color: var(--ca-text-annotation);
   line-height: 1.4;
-  padding-top: 0.35em;
   display: block;
+  padding-top: 0.35em;
 }
 
-/* ─── Navigation ─── */
+/* ─── NAVIGATION ─── */
 .ca-nav {
   position: fixed;
   top: 0;
@@ -149,11 +133,13 @@
   right: 0;
   z-index: 100;
   background: transparent;
-  transition: background 200ms ease;
+  transition: background 200ms ease, backdrop-filter 200ms ease;
 }
 
 .ca-nav.is-scrolled {
-  background: var(--ca-bg-ground);
+  background: rgba(13, 27, 42, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .ca-nav-inner {
@@ -167,7 +153,7 @@
 }
 
 .ca-nav-logo {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-sm);
   font-weight: 700;
   color: var(--ca-text-primary);
@@ -185,7 +171,7 @@
 }
 
 .ca-nav-link {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-sm);
   font-weight: 400;
   color: var(--ca-text-primary);
@@ -212,27 +198,78 @@
   transform: scaleX(1);
 }
 
-/* ─── Hero ─── */
+/* ─── HERO (dark base + video + grain layer stack) ─── */
 .ca-hero {
-  min-height: 100dvh;
+  position: relative;
+  background-color: var(--ca-bg-ground);
+  min-height: 100svh;
+  overflow: hidden;
   display: flex;
   align-items: center;
   padding-top: var(--ca-nav-height);
-  background: var(--ca-bg-ground);
+}
+
+/* Video layer — screen blend: light elements GLOW against dark base */
+.ca-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: screen;
+  opacity: 0.45;
+  z-index: 2;
+  will-change: transform;
+}
+
+/* Static image fallback — same screen blend treatment */
+.ca-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: screen;
+  opacity: 0.45;
+  z-index: 3;
+  will-change: transform;
+}
+
+/* Grain overlay — SVG feTurbulence applied as filter */
+.ca-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  filter: url(#ca-grain);
+  opacity: var(--ca-grain-opacity, 0.18);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Text content above all visual layers */
+.ca-hero-content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+.ca-hero-grid-wrapper {
+  padding-top: var(--ca-section-pad);
+  padding-bottom: var(--ca-section-pad);
 }
 
 .ca-hero-headline {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-hero);
   font-weight: 900;
   color: var(--ca-text-primary);
   line-height: 1.0;
   letter-spacing: -0.02em;
-  margin: 0 0 0.6em;
+  margin: 0 0 0.5em;
 }
 
 .ca-hero-sub {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-xl);
   font-weight: 500;
   color: var(--ca-text-dim);
@@ -241,35 +278,58 @@
 }
 
 .ca-hero-cta {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-base);
   font-weight: 500;
   color: var(--ca-text-primary);
   text-decoration: none;
-  border-bottom: 1px solid var(--ca-text-primary);
+  border-bottom: 1px solid rgba(244, 239, 230, 0.5);
   padding-bottom: 2px;
-  transition: color 200ms ease, border-color 200ms ease;
+  transition: border-color 200ms ease, color 200ms ease;
 }
 
 .ca-hero-cta:hover {
-  color: var(--ca-text-dim);
-  border-color: var(--ca-text-dim);
+  border-color: var(--ca-text-primary);
 }
 
-/* ─── Annotation (col 10-12, Barlow Condensed) ─── */
+/* ─── Annotation block ─── */
 .ca-annotation {
   font-family: var(--ca-font-condensed);
   font-size: var(--ca-type-2xs);
   font-weight: 400;
   letter-spacing: 0.1em;
   font-variant: small-caps;
-  color: var(--ca-text-dim);
+  color: var(--ca-text-annotation);
   line-height: 1.6;
 }
 
+/* ─── Scroll-emergence animation ─── */
+.ca-emerge {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity  600ms ease-out,
+    transform 600ms ease-out;
+}
+
+.ca-emerge.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.ca-emerge.visible .ca-emerge-child:nth-child(1) { transition-delay: 0ms; }
+.ca-emerge.visible .ca-emerge-child:nth-child(2) { transition-delay: 80ms; }
+.ca-emerge.visible .ca-emerge-child:nth-child(3) { transition-delay: 160ms; }
+.ca-emerge.visible .ca-emerge-child:nth-child(4) { transition-delay: 240ms; }
+.ca-emerge.visible .ca-emerge-child:nth-child(5) { transition-delay: 320ms; }
+.ca-emerge.visible .ca-emerge-child:nth-child(6) { transition-delay: 400ms; }
+.ca-emerge.visible .ca-emerge-child:nth-child(7) { transition-delay: 480ms; }
+.ca-emerge.visible .ca-emerge-child:nth-child(8) { transition-delay: 560ms; }
+
 /* ─── Body text ─── */
 .ca-body {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-base);
   font-weight: 300;
   color: var(--ca-text-primary);
@@ -277,22 +337,22 @@
   max-width: var(--ca-max-prose);
 }
 
-/* Pull quote — weight + indentation only, no left border */
+/* Pull quote — weight/color carries it, no left border */
 .ca-pull-quote {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-md);
   font-weight: 400;
-  color: var(--ca-text-primary);
+  color: var(--ca-text-dim);
   line-height: 1.5;
   margin: 1.5em 0 0;
-  padding: 0;
-  border: none;
   font-style: normal;
+  border: none;
+  padding: 0;
 }
 
 /* ─── Section headline ─── */
 .ca-section-headline {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-xl);
   font-weight: 700;
   color: var(--ca-text-primary);
@@ -301,11 +361,20 @@
   margin: 0;
 }
 
-/* ─── Instruments grid (8 instruments, 2-col at ≥1024px) ─── */
+/* ─── Hairline rule ─── */
+.ca-rule {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--ca-rule);
+  border: none;
+}
+
+/* ─── Instruments grid (8, 2-col at ≥1024px) ─── */
 .ca-instruments-grid {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: 48px;
+  gap: 48px;
   margin-top: 3em;
 }
 
@@ -321,13 +390,18 @@
   font-size: var(--ca-type-2xs);
   font-weight: 400;
   letter-spacing: 0.15em;
-  color: var(--ca-text-dim);
+  color: var(--ca-text-annotation);
   display: block;
   margin-bottom: 0.5em;
 }
 
+/* First instrument number: amber accent */
+.ca-instrument-num--amber {
+  color: var(--ca-amber);
+}
+
 .ca-instrument-name {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-sm);
   font-weight: 700;
   color: var(--ca-text-primary);
@@ -336,7 +410,7 @@
 }
 
 .ca-instrument-body {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-base);
   font-weight: 300;
   color: var(--ca-text-dim);
@@ -352,14 +426,14 @@
 .ca-phase {
   display: grid;
   grid-template-columns: 1fr auto;
-  align-items: start;
   column-gap: 32px;
-  padding: 40px 0;
-  border-top: 1px solid var(--ca-rule-light);
+  align-items: start;
+  padding: 36px 0;
+  border-top: 1px solid var(--ca-rule);
 }
 
 .ca-phase:last-child {
-  border-bottom: 1px solid var(--ca-rule-light);
+  border-bottom: 1px solid var(--ca-rule);
 }
 
 .ca-phase-label {
@@ -368,13 +442,13 @@
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ca-text-dim);
+  color: var(--ca-text-annotation);
   display: block;
   margin-bottom: 0.4em;
 }
 
 .ca-phase-name {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-lg);
   font-weight: 700;
   color: var(--ca-text-primary);
@@ -383,7 +457,7 @@
 }
 
 .ca-phase-body {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-base);
   font-weight: 300;
   color: var(--ca-text-dim);
@@ -396,158 +470,129 @@
   font-family: var(--ca-font-condensed);
   font-size: var(--ca-type-2xs);
   font-weight: 400;
-  color: var(--ca-text-dim);
+  color: var(--ca-text-annotation);
   letter-spacing: 0.08em;
   white-space: nowrap;
   padding-top: 0.3em;
 }
 
-/* ─── Dispatch cards (2-col grid, heavy border) ─── */
-.ca-dispatches-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  margin-top: 3em;
+/* ─── Dispatches — empty state ─── */
+.ca-dispatches-empty {
+  margin-top: 2.5em;
+  padding: 48px 0;
+  border-top: 1px solid var(--ca-rule);
+  border-bottom: 1px solid var(--ca-rule);
 }
 
-@media (min-width: 768px) {
-  .ca-dispatches-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.ca-dispatch-card {
-  background: var(--ca-bg-ground);
-  border: 1px solid var(--ca-rule-heavy);
-  border-top: 2px solid var(--ca-rule-heavy);
-  border-radius: 0;
-  padding: 32px;
-}
-
-.ca-card-date {
-  font-family: var(--ca-font-condensed);
-  font-size: var(--ca-type-2xs);
-  font-weight: 400;
-  color: var(--ca-text-dim);
-  letter-spacing: 0.1em;
-  font-variant: small-caps;
-  display: block;
-  margin-bottom: 1em;
-}
-
-.ca-card-headline {
-  font-family: var(--ca-font-display);
-  font-size: var(--ca-type-md);
-  font-weight: 500;
-  color: var(--ca-text-primary);
-  line-height: 1.4;
-  margin: 0 0 0.75em;
-}
-
-.ca-card-body {
-  font-family: var(--ca-font-display);
+.ca-dispatches-empty-copy {
+  font-family: var(--ca-font);
   font-size: var(--ca-type-base);
   font-weight: 300;
   color: var(--ca-text-dim);
   line-height: 1.85;
-  margin: 0 0 1.5em;
+  max-width: 52ch;
 }
 
-.ca-card-cta {
-  font-family: var(--ca-font-display);
-  font-size: var(--ca-type-sm);
-  font-weight: 500;
-  color: var(--ca-text-primary);
-  text-decoration: none;
-  border-bottom: 1px solid var(--ca-text-primary);
-  padding-bottom: 1px;
-  transition: color 200ms ease, border-color 200ms ease;
-}
-
-.ca-card-cta:hover {
-  color: var(--ca-text-dim);
-  border-color: var(--ca-text-dim);
-}
-
-/* ─── Commission CTA (dark section) ─── */
+/* ─── Commission CTA section ─── */
 .ca-cta-section {
-  background: var(--ca-bg-dark);
-  padding: var(--ca-section-pad) 0;
+  padding-top: clamp(128px, 14vw, 196px);
+  padding-bottom: var(--ca-section-pad);
+  background: var(--ca-bg-ground);
+  text-align: center;
 }
 
-.ca-cta-inner {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
+/* Single amber rule — the ONE amber decorative element in CTA */
+.ca-cta-amber-rule {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  height: 1px;
+  background: var(--ca-rule-amber);
+  border: none;
+  margin: 0 auto 3em;
 }
 
 .ca-cta-headline {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-2xl);
   font-weight: 900;
-  color: var(--ca-text-on-dark);
+  color: var(--ca-text-primary);
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin: 0 0 1em;
 }
 
 .ca-cta-body {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-md);
   font-weight: 300;
-  color: var(--ca-text-on-dark);
-  opacity: 0.75;
+  color: var(--ca-text-dim);
   line-height: 1.6;
   max-width: 52ch;
-  margin: 0 auto 1.5em;
+  margin: 0 auto 2em;
 }
 
 .ca-cta-email {
   display: block;
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-lg);
   font-weight: 500;
-  color: var(--ca-text-on-dark);
+  color: var(--ca-amber);
   text-decoration: none;
-  border-bottom: 1px solid rgba(250, 250, 248, 0.4);
+  border-bottom: 1px solid rgba(198, 134, 46, 0.4);
   padding-bottom: 2px;
-  margin-bottom: 2em;
+  margin: 0 auto 2em;
+  width: fit-content;
   transition: border-color 200ms ease;
 }
 
 .ca-cta-email:hover {
-  border-color: var(--ca-text-on-dark);
+  border-color: var(--ca-amber);
 }
 
 .ca-cta-link {
-  font-family: var(--ca-font-display);
+  font-family: var(--ca-font);
   font-size: var(--ca-type-base);
   font-weight: 500;
-  color: var(--ca-text-on-dark);
+  color: var(--ca-text-primary);
   text-decoration: none;
-  border-bottom: 1px solid rgba(250, 250, 248, 0.4);
+  border-bottom: 1px solid rgba(244, 239, 230, 0.4);
   padding-bottom: 2px;
   transition: border-color 200ms ease;
 }
 
 .ca-cta-link:hover {
-  border-color: var(--ca-text-on-dark);
+  border-color: var(--ca-text-primary);
 }
 
-/* ─── Reduced motion ─── */
+/* ─── Reduced motion compliance (hard) ─── */
 @media (prefers-reduced-motion: reduce) {
-  .ca-page-content {
-    animation-duration: 0.001ms;
+  /* Disable parallax (handled in JS) */
+  .ca-hero-video {
+    display: none;   /* hide video; static image provides visual */
+    will-change: auto;
   }
-  .ca-section-rule {
-    clip-path: none;
-    animation-duration: 0.001ms;
+  .ca-hero-img {
+    will-change: auto;
   }
+
+  /* Instant emerge — no animation */
+  .ca-emerge {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* Nav transition off */
+  .ca-nav {
+    transition: none;
+  }
+
+  /* Link transitions off */
   .ca-nav-link::after,
   .ca-hero-cta,
-  .ca-card-cta,
   .ca-cta-email,
   .ca-cta-link {
-    transition-duration: 0.001ms;
+    transition: none;
   }
 }
