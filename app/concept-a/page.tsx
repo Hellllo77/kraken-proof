@@ -78,18 +78,6 @@ const PHASES = [
   },
 ];
 
-const DISPATCHES = [
-  {
-    date: "Field Dispatch — June 2026",
-    headline: "Why most digital transformation briefs describe the wrong problem",
-    body: "The brief arrives with a solution already attached. In twelve years of survey work, we have never encountered a brief that did not contain an implicit answer to the question it was ostensibly asking.",
-  },
-  {
-    date: "Field Dispatch — May 2026",
-    headline: "The gap between stated strategy and actual operation",
-    body: "Organisations describe their operations one way. The operations actually run another. This gap is not unusual — it is the default condition of any organisation that has grown faster than its documentation.",
-  },
-];
 
 export default function ConceptAPage() {
   return (
@@ -221,18 +209,10 @@ export default function ConceptAPage() {
                 <h2 className="ca-section-headline">
                   Recent field dispatches.
                 </h2>
-                <div className="ca-dispatches-grid">
-                  {DISPATCHES.map((d) => (
-                    <article key={d.headline} className="ca-dispatch-card">
-                      <span className="ca-card-date">{d.date}</span>
-                      <h3 className="ca-card-headline">{d.headline}</h3>
-                      <p className="ca-card-body">{d.body}</p>
-                      <Link href="/insights" className="ca-card-cta">
-                        Read dispatch →
-                      </Link>
-                    </article>
-                  ))}
-                </div>
+                <p className="ca-body" style={{ marginTop: "2em" }}>
+                  Dispatches from the field are published when the survey work produces findings
+                  worth sharing. The first dispatch is in preparation.
+                </p>
               </div>
             </div>
           </div>
