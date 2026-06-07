@@ -87,7 +87,7 @@ export default function ConceptAHeroImmersive({ children }: Props) {
         playsInline
         aria-hidden="true"
       >
-        <source src="/assets/concept-a/hero-depth.mp4" type="video/mp4" />
+        <source src="/assets/concept-a/hero-depth-v2.mp4" type="video/mp4" />
       </video>
 
       {/* z-index 3 — static image, same screen blend (always present as visual layer) */}

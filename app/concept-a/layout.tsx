@@ -1,9 +1,17 @@
-import { Barlow, Barlow_Condensed } from "next/font/google";
+import { Barlow, Barlow_Condensed, Cormorant_Garamond } from "next/font/google";
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-ca-cormorant",
+  weight: ["300", "400", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
 
 const barlow = Barlow({
   subsets: ["latin"],
   variable: "--font-ca-barlow",
-  weight: ["300", "400", "500", "700", "900"],
+  weight: ["300", "400", "500", "700"],
   display: "swap",
 });
 
@@ -16,7 +24,7 @@ const barlowCondensed = Barlow_Condensed({
 
 export default function ConceptALayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${barlow.variable} ${barlowCondensed.variable} ca-root`}>
+    <div className={`${cormorantGaramond.variable} ${barlow.variable} ${barlowCondensed.variable} ca-root`}>
       {children}
     </div>
   );
