@@ -330,8 +330,8 @@ a:hover {
   inset: 0;
   background-image: url('/assets/section3-navy-texture.jpg');
   background-size: cover;
-  opacity: 0.06;
-  mix-blend-mode: multiply;
+  opacity: 0.12;
+  mix-blend-mode: soft-light;
   pointer-events: none;
   z-index: 0;
 }
@@ -352,8 +352,8 @@ a:hover {
   background-image: url('/assets/capabilities-bg.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.08;
-  mix-blend-mode: screen;
+  opacity: 0.12;
+  mix-blend-mode: soft-light;
   pointer-events: none;
   z-index: 0;
 }
