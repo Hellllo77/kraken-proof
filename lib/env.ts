@@ -15,11 +15,12 @@ const REQUIRED_PUBLIC: Record<string, string> = {
     "URL of the central-feedback-service (e.g. https://ccc-central-feedback.example.com)",
   NEXT_PUBLIC_FEEDBACK_PROJECT_ID:
     "Project ID registered in central-feedback-service (e.g. kraken-interactive)",
-  NEXT_PUBLIC_CAL_LINK:
-    "Cal.com booking link slug (e.g. kraken-interactive/commission-a-survey)",
   NEXT_PUBLIC_SITE_URL:
-    "Canonical site URL without trailing slash (e.g. https://krakeninteractive.com)",
+    "Canonical site URL without trailing slash (e.g. https://kraken.com.my)",
 };
+
+// Optional public vars — build succeeds without these; features degrade gracefully.
+// NEXT_PUBLIC_CAL_LINK: Cal.com booking slug — when unset, contact page shows form-only fallback.
 
 const REQUIRED_SERVER: Record<string, string> = {
   PAYLOAD_SECRET: "Payload CMS secret key (min 32 chars)",
@@ -65,7 +66,7 @@ export const env = {
   // NEXT_PUBLIC (available client-side after build)
   centralFeedbackUrl:  process.env.NEXT_PUBLIC_CENTRAL_FEEDBACK_URL!,
   feedbackProjectId:   process.env.NEXT_PUBLIC_FEEDBACK_PROJECT_ID!,
-  calLink:             process.env.NEXT_PUBLIC_CAL_LINK!,
+  calLink:             process.env.NEXT_PUBLIC_CAL_LINK ?? "",
   siteUrl:             process.env.NEXT_PUBLIC_SITE_URL!,
   // Server-only
   payloadSecret:       process.env.PAYLOAD_SECRET!,

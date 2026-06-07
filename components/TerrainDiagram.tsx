@@ -121,7 +121,6 @@ export default function TerrainDiagram() {
       <svg
         viewBox="0 0 800 480"
         width="100%"
-        height="auto"
         style={{ display: "block", background: "var(--navy-900)", maxHeight: "480px" }}
         role="img"
       >

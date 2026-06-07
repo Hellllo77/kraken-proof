@@ -37,9 +37,10 @@ export default function ContactForm({ calLink }: Props) {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        gridTemplateColumns: calLink ? "1fr 1fr" : "1fr",
         gap: "var(--space-12)",
         alignItems: "start",
+        maxWidth: calLink ? "none" : "640px",
       }}
     >
       {/* Contact form */}
@@ -50,11 +51,16 @@ export default function ContactForm({ calLink }: Props) {
             fontSize: "var(--type-heading)",
             fontWeight: 600,
             color: "var(--color-navy-900)",
-            marginBottom: "var(--space-6)",
+            marginBottom: "var(--space-3)",
           }}
         >
           Submit a Brief
         </h2>
+        {!calLink && (
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-sm)", fontStyle: "italic", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)", marginBottom: "var(--space-6)" }}>
+            Request an initial consultation below — we&apos;ll schedule directly.
+          </p>
+        )}
 
         {status === "sent" ? (
           <div className="field-note" style={{ padding: "var(--space-4)" }}>
@@ -156,35 +162,29 @@ export default function ContactForm({ calLink }: Props) {
         )}
       </div>
 
-      {/* Cal.com booking */}
-      <div>
-        <h2
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "var(--type-heading)",
-            fontWeight: 600,
-            color: "var(--color-navy-900)",
-            marginBottom: "var(--space-6)",
-          }}
-        >
-          Book an Initial Consultation
-        </h2>
+      {/* Cal.com booking — only rendered when env var is set */}
+      {calLink && (
+        <div>
+          <h2
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "var(--type-heading)",
+              fontWeight: 600,
+              color: "var(--color-navy-900)",
+              marginBottom: "var(--space-6)",
+            }}
+          >
+            Book an Initial Consultation
+          </h2>
 
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)", marginBottom: "var(--space-4)" }}>
-          Prefer to speak first? Book a 30-minute orientation call — no prior brief required.
-          We use this conversation to understand the terrain before any engagement is proposed.
-        </p>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-700)", lineHeight: "var(--lh-body)", marginBottom: "var(--space-4)" }}>
+            Prefer to speak first? Book a 30-minute orientation call — no prior brief required.
+            We use this conversation to understand the terrain before any engagement is proposed.
+          </p>
 
-        {calLink ? (
           <CalEmbed calLink={calLink} />
-        ) : (
-          <div className="field-note" style={{ padding: "var(--space-4)" }}>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "var(--type-body)", color: "var(--color-navy-400)", fontStyle: "italic" }}>
-              [ Cal.com booking — NEXT_PUBLIC_CAL_LINK not set. Configure and rebuild. ]
-            </p>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
