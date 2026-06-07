@@ -263,12 +263,12 @@ html:has(.ca-root) {
   line-height: 1.6;
 }
 
-/* Hero headline: Cormorant Garamond 300 Light Italic — thin strokes echo the amber light rays */
+/* Hero headline: Cormorant Garamond 300 Light Upright — italic reserved for blockquotes/annotations */
 .ca-hero-headline {
   font-family: var(--font-display);
   font-size: var(--type-display);
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   color: var(--text-primary);
   line-height: 0.95;
   letter-spacing: -0.01em;
@@ -662,7 +662,7 @@ html:has(.ca-root) {
   font-family: var(--font-display);
   font-size: var(--type-2xl);
   font-weight: 600;
-  font-style: italic;
+  font-style: normal;
   color: var(--text-primary);
   line-height: 1.1;
   margin: 0 0 clamp(2rem, 4vw, 4rem);
@@ -717,12 +717,12 @@ html:has(.ca-root) {
   }
 }
 
-/* CTA headline: Cormorant Garamond 300 Italic at display scale */
+/* CTA headline: Cormorant Garamond 300 Upright at display scale */
 .ca-cta-headline {
   font-family: var(--font-display);
   font-size: var(--type-display);
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
   color: var(--text-primary);
   line-height: 0.95;
   letter-spacing: -0.01em;
