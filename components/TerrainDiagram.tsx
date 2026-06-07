@@ -169,7 +169,6 @@ export default function TerrainDiagram() {
                 fontSize="8.5"
                 fontWeight="600"
                 letterSpacing="0.08em"
-                textTransform="uppercase"
                 fill={zone.isAmber ? "#C6862E" : "#EBE4D6"}
                 fillOpacity={isActive ? 1 : 0.75}
                 style={{ textTransform: "uppercase", pointerEvents: "none" }}
