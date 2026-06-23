@@ -949,3 +949,55 @@ html:has(.ca-root) {
   .ca-cta-email,
   .ca-cta-link::after { transition: none; }
 }
+
+/* ─── FOOTER — address, contact, est. year ─── */
+.ca-footer {
+  background: var(--bg-ground);
+  border-top: 1px solid var(--rule-depth);
+  padding: 1.75rem clamp(24px, 4vw, 64px);
+}
+
+.ca-footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.ca-footer-address {
+  font-family: var(--font-label);
+  font-size: var(--type-xs);
+  font-weight: 400;
+  color: var(--text-depth);
+  line-height: 1.6;
+  font-style: normal;
+  letter-spacing: 0.04em;
+}
+
+.ca-footer-address a {
+  color: var(--text-depth);
+  text-decoration: none;
+  transition: color 180ms var(--ease-out-quart);
+}
+
+.ca-footer-address a:hover { color: var(--text-amber); }
+
+.ca-footer-est {
+  font-family: var(--font-label);
+  font-size: var(--type-xs);
+  font-weight: 400;
+  color: var(--text-depth);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 599px) {
+  .ca-footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}

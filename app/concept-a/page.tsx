@@ -257,6 +257,19 @@ export default function ConceptAPage() {
           </ConceptAEmerge>
         </div>
       </section>
+      {/* ── Concept A Footer — address, contact, est. year ── */}
+      <footer className="ca-footer">
+        <div className="ca-footer-inner">
+          <address className="ca-footer-address">
+            Kraken Interactive Sdn. Bhd.&nbsp;&middot;&nbsp;
+            16-2 Jalan PJU 8/3A, Damansara Perdana,&nbsp;
+            47820 Petaling Jaya, Selangor&nbsp;&middot;&nbsp;
+            <a href="mailto:hello@kraken.com.my">hello@kraken.com.my</a>
+          </address>
+          <span className="ca-footer-est">Est. 2010</span>
+        </div>
+      </footer>
+
       <Script src="/concept-a-interior-parallax.js" strategy="afterInteractive" />
     </div>
   );
